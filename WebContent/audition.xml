@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<audition>
+    <date>20/10/2018</date>
+    <heure>11:00</heure>
+    <lieu>Mairie de Ponthoux</lieu>
+    <morceau>
+        <titre>Sonate n°1</titre>
+        <compositeur>W.A. Mozart</compositeur>
+        <arrangeur>Bibi</arrangeur>
+        <duree>PT2M30S</duree>
+        <chaises>0</chaises>
+        <pupitres>1</pupitres>
+        <eleve>
+            <prenom>Jean</prenom>
+            <nom>Dupont</nom>
+            <instrument>Piano</instrument>
+        </eleve>
+    </morceau>
+    <morceau>
+        <titre>Duo n°1</titre>
+        <compositeur>Joseph Küffner</compositeur>
+        <duree>PT1M15S</duree>
+        <chaises>2</chaises>
+        <pupitres>1</pupitres>
+        <eleve>
+            <prenom>Rémi</prenom>
+            <nom>Fassol</nom>
+            <instrument>Clarinette</instrument>
+        </eleve>
+        <eleve>
+            <prenom>Ella</prenom>
+            <nom>Sidot</nom>
+            <instrument>Clarinette</instrument>
+        </eleve>
+    </morceau>
+</audition>

@@ -1,0 +1,203 @@
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: sans-serif;
+}
+
+a.bouton {
+    background: linear-gradient(0deg, #666666, #eeeeee);
+	border-radius: 5px;
+    padding: 5px 15px;
+    color: black;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: normal;
+    outline: none;
+    border: 1px solid black;
+}
+
+h1 {
+	font-family: OpenSans-Regular;
+    font-size: 18px;
+    font-weight: unset;
+    color: #fff;
+    line-height: 1.2;
+}
+
+p { padding: 10px;}
+
+ul, li {
+	list-style-type: none;
+}
+
+input {
+	outline: none;
+	border: 1px solid black;
+}
+
+iframe {
+	border: none !important;
+}
+
+header.menu {
+	width: 100%;
+	background: #36304a;
+}
+
+.limiter {
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  background: #c850c0;
+  background: -webkit-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -o-linear-gradient(45deg, #4158d0, #c850c0);
+  background: -moz-linear-gradient(45deg, #4158d0, #c850c0);
+  background: linear-gradient(45deg, #4158d0, #c850c0);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.conteneur-600, .conteneur-1200 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.conteneur-600 {
+  width: 600px;
+}
+
+.conteneur-1200 {
+  width: 1240px;
+}
+
+.formulaire {
+    width: 100%;
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+    margin: 10px 0px 10px 0px;
+    padding: 0px;
+}
+
+.formulaire header, footer {
+	background: #36304a;
+    padding: 10px;
+}
+
+.formulaire header {
+    text-align: left;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.formulaire section {
+	background: #ddd;
+	padding: 0px;
+	border-radius:0px;
+	color: #555;
+}
+
+.formulaire footer {
+    text-align: center;
+    border-radius: 0px 0px 10px 10px;
+}
+
+input[type="text"],
+ input[type="number"],
+ input[type="time"] {
+    padding:5px;
+    border-radius: 5px;
+}
+
+input[type="number"] {
+    width: 50px;
+    align: center;
+}
+
+input[type="submit"] {
+    padding:5px 15px;
+    cursor:pointer;
+    border-radius: 5px;
+    background: linear-gradient(0deg, #666666, #eeeeee);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+label:hover {
+	cursor: pointer;
+	color: #222;
+}
+
+select.eleves {
+	padding: 5px;
+	display: block;
+	margin: auto;
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: #eee;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+table * {
+  position: relative;
+}
+table td, table th {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+table thead tr {
+  height: 60px;
+  background: #ccc;
+}
+table tbody tr {
+  height: 50px;
+}
+
+table td, table th {
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ccc;
+}
+
+tbody tr {
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+.column-radio {
+	width: 50px;
+	text-align: center;
+}
