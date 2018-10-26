@@ -89,6 +89,7 @@ public class MorceauGestion extends HttpServlet {
 			morceauReset(session);
 			Morceau m = recupMorceau(session, request);
 			session.setAttribute("morceautmp", m);
+			session.setAttribute("morceauEnCoursEdition", m);
 			elevesEdites.addAll(m.getEleves());
 			session.setAttribute("elevesEdites", elevesEdites);
 			break;

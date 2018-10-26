@@ -3,8 +3,7 @@ package com.bikingyom.beans;
 import java.time.Duration;
 import java.util.TreeSet;
 
-public class Morceau implements Comparable<Morceau> {
-    private Integer numero; 
+public class Morceau {
 	private String titre, compositeur, arrangeur;
     private Duration duree;
     private int chaises, pupitres;
@@ -73,8 +72,7 @@ public class Morceau implements Comparable<Morceau> {
 		return true;
 	}
 
-	public Morceau(Integer numero, String titre, String compositeur, String arrangeur, Duration duree, int chaises, int pupitres, String materiel, TreeSet<Eleve> eleves) {
-        this.numero = numero;
+	public Morceau(String titre, String compositeur, String arrangeur, Duration duree, int chaises, int pupitres, String materiel, TreeSet<Eleve> eleves) {
 		this.titre = titre;
         this.compositeur = compositeur;
         this.arrangeur = arrangeur;
@@ -92,14 +90,6 @@ public class Morceau implements Comparable<Morceau> {
 
 	public void setSuppr(boolean suppr) {
 		this.suppr = suppr;
-	}
-
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
 	}
 
 	public String getMateriel() {
@@ -170,12 +160,12 @@ public class Morceau implements Comparable<Morceau> {
         this.eleves.add(eleve);
     }
 
-	@Override
+	/*@Override
 	public int compareTo(Morceau m) {
 		if (this.hashCode() == m.hashCode())
 			return 0;
 		else {
 			return this.numero.compareTo(m.numero);
 		}
-	}
+	}*/
 }

@@ -3,22 +3,25 @@ package com.bikingyom.beans;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.TreeSet;
 
 public class Audition {
     private LocalDate date;
     private LocalTime heure;
     private String lieu;
-    private TreeSet<Morceau> morceaux;
+    private ArrayList<Morceau> morceaux, morceauxSuppr;
 
     public Audition() {
     	this.date = LocalDate.parse("01/01/1901", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     	this.heure = LocalTime.parse("00:00", DateTimeFormatter.ofPattern("HH:mm"));
     	this.lieu = "";
-    	this.morceaux = new TreeSet<>();
+    	this.morceaux = new ArrayList<>();
+    	this.morceauxSuppr = new ArrayList<>();
     }
     
-    public Audition(LocalDate date, LocalTime heure, String lieu, TreeSet<Morceau> morceaux) {
+    public Audition(LocalDate date, LocalTime heure, String lieu, ArrayList<Morceau> morceaux) {
         this.date = date;
         this.heure = heure;
         this.lieu = lieu;
@@ -53,20 +56,21 @@ public class Audition {
 		this.lieu = lieu;
 	}
 
-	public TreeSet<Morceau> getMorceaux() {
+	public ArrayList<Morceau> getMorceaux() {
 		return morceaux;
 	}
 
-	public void setMorceaux(TreeSet<Morceau> morceaux) {
+	public void setMorceaux(ArrayList<Morceau> morceaux) {
 		this.morceaux = morceaux;
 	}
 
-    public void addMorceau(Morceau morceau, Integer numero) {
-    	morceau.setNumero(numero);
-        this.morceaux.add(morceau);
+    public void addMorceau(Morceau morceau) {
+    	if (!this.morceaux.contains(morceau))
+    		this.morceaux.add(morceau);
     }
     
     public void removeMorceau(Morceau morceau) {
+    	this.morceauxSuppr.add(morceau);
     	this.morceaux.remove(morceau);
     }
     
@@ -81,4 +85,8 @@ public class Audition {
     	}
     	return eleves;
     }
+
+	public void swapMorceaux(int i, int j) {
+		Collections.swap(this.morceaux, i, j);
+	}
 }

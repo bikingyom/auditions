@@ -41,7 +41,7 @@ public class EleveGestion extends HttpServlet {
 		TreeSet<Eleve> tousEleves = audition.getTousEleves();
 		request.setAttribute("tousEleves", tousEleves);
 		String dureeString = "PT" + request.getParameter("minutes") + "M" + request.getParameter("secondes") + "S";
-		Morceau morceautmp = new Morceau(session.getAttribute("morceautmp") == null ? null : ((Morceau) session.getAttribute("morceautmp")).getNumero(), request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), null);
+		Morceau morceautmp = new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), null);
 		session.setAttribute("morceautmp", morceautmp);
         this.getServletContext().getRequestDispatcher("/WEB-INF/elevesgestion.jsp").forward(request, response);
 	}

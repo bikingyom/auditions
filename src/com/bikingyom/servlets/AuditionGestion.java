@@ -6,7 +6,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 import javax.servlet.ServletException;
@@ -59,17 +61,16 @@ public class AuditionGestion extends HttpServlet {
 			audition.setDate(LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 			audition.setHeure(LocalTime.parse(request.getParameter("heure"), DateTimeFormatter.ofPattern("HH:mm")));
 			audition.setLieu(request.getParameter("lieu"));
-			audition.setMorceaux(new TreeSet<Morceau>());
+			audition.setMorceaux(new ArrayList<Morceau>());
 			break;
 			
 		case "Valider le morceau":
-			Integer numeroTmp = (Integer)(audition.getMorceaux().size() + 1);
 			if ((boolean) session.getAttribute("modif")) {
-				Morceau morceauTmp = (Morceau) session.getAttribute("morceautmp");
-				numeroTmp = morceauTmp.getNumero();
-				audition.removeMorceau(morceauTmp);
+				Morceau morceauTmp = (Morceau) session.getAttribute("morceauEnCoursEdition");
+				audition.getMorceaux().set(audition.getMorceaux().indexOf(morceauTmp), recupNouveauMorceau(request));
 			}
-			audition.addMorceau(recupNouveauMorceau(request), numeroTmp);
+			else
+				audition.addMorceau(recupNouveauMorceau(request));
 			break;
 			
 		case "Supprimer un morceau":
@@ -80,7 +81,7 @@ public class AuditionGestion extends HttpServlet {
 			do {
 				m = it.next();
 			} while (it.hasNext() && m.hashCode() != hashCode);
-			m.setSuppr(true);
+			audition.removeMorceau(m);
 			break;
 			
 		default:
@@ -96,7 +97,7 @@ public class AuditionGestion extends HttpServlet {
 		String dureeString = "PT" + request.getParameter("minutes") + "M" + request.getParameter("secondes") + "S";
 		HttpSession session = request.getSession();
         TreeSet<Eleve> listeEleves = (TreeSet<Eleve>) ((TreeSet<Eleve>)session.getAttribute("elevesEdites")).clone();
-		return new Morceau(null, request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), listeEleves);
+		return new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), listeEleves);
 	}
 
 }

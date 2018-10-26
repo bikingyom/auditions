@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.TreeSet;
@@ -32,13 +34,11 @@ public class DonneesAuditionXML implements DonneesAudition {
 		    LocalTime nouvelleHeure = LocalTime.parse(auditionXML.getChildText("heure"), DateTimeFormatter.ofPattern("HH:mm"));
 		    String nouveauLieu = auditionXML.getChildText("lieu");
 		    
-		    TreeSet<Morceau> nouveauxMorceaux = new TreeSet<>();
+		    ArrayList<Morceau> nouveauxMorceaux = new ArrayList<>();
 		    List<Element> morceauxXML = auditionXML.getChildren("morceau");
 		    ListIterator<Element> it1 = morceauxXML.listIterator();
 		    
-		    Integer i = 0;
 		    while (it1.hasNext()) {
-		    	i++;
 		    	Element morceauXML = (Element) it1.next();
 		    	String nouveauTitre = morceauXML.getChildText("titre");
 		    	String nouveauCompositeur = morceauXML.getChildText("compositeur");
@@ -60,7 +60,7 @@ public class DonneesAuditionXML implements DonneesAudition {
 		    		nouvelInstrument = eleveXML.getChildText("instrument");
 		    		nouveauxEleves.add(new Eleve(nouveauNom, nouveauPrenom, nouvelInstrument));
 		    	}
-		    	nouveauxMorceaux.add(new Morceau(i, nouveauTitre, nouveauCompositeur, nouvelArrangeur, nouvelleDuree, nouvellesChaises, nouveauxPupitres, nouveauMateriel, nouveauxEleves));
+		    	nouveauxMorceaux.add(new Morceau(nouveauTitre, nouveauCompositeur, nouvelArrangeur, nouvelleDuree, nouvellesChaises, nouveauxPupitres, nouveauMateriel, nouveauxEleves));
 		    	
 		    }
 		    audition = new Audition(nouvelleDate, nouvelleHeure, nouveauLieu, nouveauxMorceaux);
