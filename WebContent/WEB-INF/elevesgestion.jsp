@@ -62,17 +62,22 @@
 						<header><h1>Saisie d'un nouvel élève</h1></header>
 						<section>
                 			<table>
-            		   				<tr><td><label for="nom">Nom : </label><input type="text" name="nom" id="nom" required /></td></tr>
+            		   			<tr><td><label for="nom">Nom : </label><input type="text" name="nom" id="nom" required /></td></tr>
         	       				<tr><td><label for="prenom">Prénom : </label><input type="text" name="prenom" id="prenom" required /></td></tr>
     	           				<tr><td>
 	               					<label for="instrument">Instrument : </label>
                						<select name="instrument" id="instrument">
                							<option value="Flute">Flute</option>
+               							<option value="Hautbois">Hautbois</option>
                							<option value="Clarinette">Clarinette</option>
                							<option value="Saxophone">Saxophone</option>
                							<option value="Basson">Basson</option>
             	   						<option value="Piano">Piano</option>
         	       						<option value="Guitare">Guitare</option>
+        	       						<option value="Violon">Violon</option>
+        	       						<option value="Alto">Alto</option>
+        	       						<option value="Violoncelle">Violoncelle</option>
+        	       						<option value="Contrebasse">Contrebasse</option>
     	           						<option value="Trompette">Trompette</option>
 	               						<option value="Trombone">Trombone</option>
                							<option value="Tuba">Tuba</option>
