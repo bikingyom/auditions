@@ -9,6 +9,8 @@
 			function lancer(elt) {
 				if(elt.value == 'Valider le morceau')
 					document.forms[0].action='auditiongestion';
+				else if(elt.value == 'Supprimer un élève')
+					document.forms[0].action='morceaugestion';
 				else
 					document.forms[0].action='elevesgestion';
 			}
@@ -46,13 +48,19 @@
 						</c:if>
 						<c:if test="${ elevesEdites.size() != 0 && elevesEdites != null }">
     		  				<table>
+       							<c:set var="i" value="0" scope="page" />
        							<c:forEach var="eleve" items="${ elevesEdites }">
+       								<c:set var="i" value="${ i+1 }" scope="page" />
        								<tr>
+       									<td class="column-radio">
+											<input type="radio" name="elevechoisi" value="${ eleve.hashCode() }" id="${ eleve.hashCode() }" form="formmorceau" ${ i == 1 ? 'checked="checked"' : '' } />
+										</td>
        									<td class="column1"><c:out value="${ eleve.nom }" /></td>
        									<td class="column2"><c:out value="${ eleve.prenom }" /></td>
        									<td class="column3"><c:out value="${ eleve.instrument }" /></td>
        								</tr> 
 	       						</c:forEach>
+	       						<c:remove var="i" scope="page" />
     	    				</table>
         					</c:if>
         				<c:if test="${ !(erreur.length() == 0 || erreur == null) }">
@@ -61,6 +69,7 @@
     	    		</section>
         			<footer>
         				<input type="submit" name="bouton" value="Ajouter un élève" onclick="lancer(this)" form="formmorceau" />
+        				<input type="submit" name="bouton" value="Supprimer un élève" onclick="lancer(this)" form="formmorceau" />
 					</footer>
 				</div>
 			</div>

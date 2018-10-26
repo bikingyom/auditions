@@ -42,6 +42,16 @@ public class MorceauGestion extends HttpServlet {
 		String action = request.getParameter("bouton");
 		HttpSession session = request.getSession();
 		switch (action) {
+		case "Supprimer un élève":
+			int hashCode = Integer.parseInt(request.getParameter("elevechoisi"));
+			Iterator<Eleve> it1 = elevesEdites.iterator();
+			Eleve e1;
+			do {
+				e1 = it1.next();
+			} while (it1.hasNext() && e1.hashCode() != hashCode);
+			elevesEdites.remove(e1);
+			break;
+			
 		case "Valider l'élève":
 			if (request.getParameter("nom").isEmpty() || request.getParameter("nom") == null || request.getParameter("prenom").isEmpty() || request.getParameter("prenom") == null || request.getParameter("instrument").isEmpty() || request.getParameter("instrument") == null) {
 				request.setAttribute("erreur", "Soit vous avez un vieux navigateur, soit vous êtes très fort. Dans les deux cas, vous n'avez pas entré toutes les informations concernant l'élève à ajouter, merci de recommencer");

@@ -65,11 +65,13 @@ public class AuditionGestion extends HttpServlet {
 			break;
 			
 		case "Valider le morceau":
-			if ((boolean) session.getAttribute("modif")) {
+			if ((boolean) session.getAttribute("modif")) { // s'il s'agit d'une modification
 				Morceau morceauTmp = (Morceau) session.getAttribute("morceauEnCoursEdition");
-				audition.getMorceaux().set(audition.getMorceaux().indexOf(morceauTmp), recupNouveauMorceau(request));
+				int index = audition.getMorceaux().indexOf(morceauTmp);
+				if (index != -1) // pour éviter le cas où la page est rechargée et la requête renvoyée
+					audition.getMorceaux().set(index, recupNouveauMorceau(request));
 			}
-			else
+			else // s'il s'agit d'un nouveau morceau
 				audition.addMorceau(recupNouveauMorceau(request));
 			
 	        donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
