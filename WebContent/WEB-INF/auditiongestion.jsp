@@ -46,10 +46,9 @@
     	    					</thead>
         						<tbody>
         							<c:forEach var="morceau" items="${ audition.morceaux }">
-        								<c:if test="${ morceau.suppr == false  }">
         								<tr>
         									<td class="column-radio">
-												${ morceau.numero } <input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }" form="formmorceau"/>
+												<input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }" form="formmorceau"/>
 											</td>
         									<td class="column1"><c:out value="${ morceau.titre }" /></td>
         									<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
@@ -64,7 +63,6 @@
         										</c:forEach>
         									</td>
         								</tr>
-        								</c:if>
         							</c:forEach>
 	        					</tbody>
     	    				</table>

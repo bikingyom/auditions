@@ -1,12 +1,15 @@
 package com.bikingyom.dao;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
@@ -16,15 +19,21 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 import com.bikingyom.beans.Audition;
 import com.bikingyom.beans.Eleve;
 import com.bikingyom.beans.Morceau;
 
 public class DonneesAuditionXML implements DonneesAudition {
-	private Audition audition;
+	public DonneesAuditionXML() {
+		
+	}
 	
-	public DonneesAuditionXML(File fichier) {
+	@Override
+	public Audition charger(File fichier) {
+		Audition audition = null;
 		try {
 			SAXBuilder builder = new SAXBuilder();
 		    Document document = builder.build(fichier);
@@ -70,11 +79,58 @@ public class DonneesAuditionXML implements DonneesAudition {
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
+		return audition;
 	}
-
+	
 	@Override
-	public Audition getAudition() {
-		return this.audition;
-	}
+	public void enregistrer(Audition audition, File fichier) {
+		Element racine = new Element("audition");
+	    Document document = new Document(racine);
+	    racine.addContent(new Element("date").setText(audition.getFormattedDate()));
+	    racine.addContent(new Element("heure").setText(audition.getHeure().toString()));
+	    racine.addContent(new Element("lieu").setText(audition.getLieu()));
+	    Iterator<Morceau> it1 = audition.getMorceaux().iterator();
+	    while (it1.hasNext()) {
+	    	Morceau m = it1.next();
+	    	Element morceauXML = new Element("morceau");
+	    	racine.addContent(morceauXML);
+	    	morceauXML.addContent(new Element("titre").setText(m.getTitre()));
+	    	morceauXML.addContent(new Element("compositeur").setText(m.getCompositeur()));
+	    	morceauXML.addContent(new Element("arrangeur").setText(m.getArrangeur()));
+	    	morceauXML.addContent(new Element("duree").setText(m.getDuree().toString()));
+	    	morceauXML.addContent(new Element("chaises").setText(Integer.toString(m.getChaises())));
+	    	morceauXML.addContent(new Element("pupitres").setText(Integer.toString(m.getPupitres())));
+	    	morceauXML.addContent(new Element("materiel").setText(m.getMateriel()));
+	    	Iterator<Eleve> it2 = m.getEleves().iterator();
+	    	while (it2.hasNext()) {
+	    		Eleve e = it2.next();
+	    		Element eleveXML = new Element ("eleve");
+	    		morceauXML.addContent(eleveXML);
+	    		eleveXML.addContent(new Element("nom").setText(e.getNom()));
+	    		eleveXML.addContent(new Element("prenom").setText(e.getPrenom()));
+	    		eleveXML.addContent(new Element("instrument").setText(e.getInstrument()));
+	    	}
+	    }
 
+	    Format format = Format.getPrettyFormat();
+	    format.setEncoding("UTF-8");
+	    XMLOutputter sortie = new XMLOutputter(format);
+
+	    FileOutputStream fos = null;
+	    try {
+	    	fos = new FileOutputStream(fichier); 
+	    	OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8"); 
+	    	sortie.output(document, out);
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    } finally {
+	    	if (fos != null) {
+	    		try {
+	    			fos.close();
+	    		} catch (IOException e) {
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    }
+	}
 }

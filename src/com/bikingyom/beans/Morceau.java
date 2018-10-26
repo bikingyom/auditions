@@ -9,7 +9,6 @@ public class Morceau {
     private int chaises, pupitres;
     private String materiel;
     private TreeSet<Eleve> eleves;
-    private boolean suppr;
 
     @Override
 	public int hashCode() {
@@ -81,16 +80,7 @@ public class Morceau {
         this.pupitres = pupitres;
         this.materiel = materiel;
         this.eleves = eleves;
-        this.suppr = false;
     }
-
-    public boolean isSuppr() {
-		return suppr;
-	}
-
-	public void setSuppr(boolean suppr) {
-		this.suppr = suppr;
-	}
 
 	public String getMateriel() {
 		return materiel;
@@ -159,13 +149,4 @@ public class Morceau {
     public void addEleve(Eleve eleve) {
         this.eleves.add(eleve);
     }
-
-	/*@Override
-	public int compareTo(Morceau m) {
-		if (this.hashCode() == m.hashCode())
-			return 0;
-		else {
-			return this.numero.compareTo(m.numero);
-		}
-	}*/
 }

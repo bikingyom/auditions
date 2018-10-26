@@ -50,11 +50,11 @@ public class AuditionGestion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("bouton");
 		HttpSession session = request.getSession();
+		DonneesAudition donnees = new DonneesAuditionXML();
 
 		switch (action) {
 		case "Charger une audition":
-	        DonneesAudition donnees = new DonneesAuditionXML(new File(this.getServletContext().getRealPath("") + "/audition.xml"));
-	        audition = donnees.getAudition();
+	        audition = donnees.charger(new File(this.getServletContext().getRealPath("") + "/audition.xml"));
 	        break;
 		
 		case "Créer une audition":
@@ -71,6 +71,8 @@ public class AuditionGestion extends HttpServlet {
 			}
 			else
 				audition.addMorceau(recupNouveauMorceau(request));
+			
+	        donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
 			break;
 			
 		case "Supprimer un morceau":
@@ -82,6 +84,7 @@ public class AuditionGestion extends HttpServlet {
 				m = it.next();
 			} while (it.hasNext() && m.hashCode() != hashCode);
 			audition.removeMorceau(m);
+	        donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
 			break;
 			
 		default:
