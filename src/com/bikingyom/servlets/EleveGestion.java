@@ -28,15 +28,14 @@ public class EleveGestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/elevesgestion.jsp").forward(request, response);
+		response.sendRedirect("accueil");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		Audition audition = (Audition) session.getAttribute("audition");
 		TreeSet<Eleve> tousEleves = audition.getTousEleves();
 		request.setAttribute("tousEleves", tousEleves);
