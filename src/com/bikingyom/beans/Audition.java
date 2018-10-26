@@ -26,6 +26,7 @@ public class Audition {
         this.heure = heure;
         this.lieu = lieu;
         this.morceaux = morceaux;
+        this.morceauxSuppr = new ArrayList<>();
     }
     
     public LocalDate getDate() {
