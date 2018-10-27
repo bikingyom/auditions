@@ -10,6 +10,14 @@
 		<div class="limiter">
 			<div class="conteneur-600">
 	        	<div class="formulaire">
+	        		<c:choose>
+	        		<c:when test="${ err == 'accesdirect' }">
+        				<p id="tempo">Il est impossible d'accéder directement à la page demandée. Vous avez donc été redirigé à la page d'accueil.</p>
+        			</c:when>
+        			<c:when test="${ err == 'sessionexp' }">
+        				<p id="tempo">Votre session a expiré. Vous avez donc été redirigé à la page d'accueil.</p>
+        			</c:when>
+        			</c:choose>
     	    		<header><h1>Charger une audition</h1></header>
         			<section>
         				<p>Ici se trouvera la liste des auditions existantes</p>

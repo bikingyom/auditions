@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
+		<form action="morceaugestion" method="post" id="formannuler"></form>
 		<div class="limiter">
 			<div class="conteneur-600">
 				<c:if test="${ audition.morceaux.size() != 0 && audition.morceaux != null }">
@@ -23,7 +24,7 @@
     	    						</select>
     	    					</p>
 	       					</section>
-        					<footer><input type="submit" name="bouton" value="Valider la sélection"> <a href="morceaugestion" class="bouton">Annuler</a></footer>
+        					<footer><input type="submit" name="bouton" value="Valider la sélection"> <input type="submit" name="bouton" value="Annuler" form="formannuler"/></footer>
     	   				</form>
 	       			</div>
        				<div class="formulaire">
@@ -52,7 +53,7 @@
        								</c:forEach>
 	        					</table>
        						</section>
-       						<footer><input type="submit" name="bouton" value="Dupliquer les élèves"> <a href="morceaugestion" class="bouton">Annuler</a></footer>
+       						<footer><input type="submit" name="bouton" value="Dupliquer les élèves"> <input type="submit" name="bouton" value="Annuler" form="formannuler"/></footer>
    						</form>
 	       			</div>
       			</c:if>
@@ -89,7 +90,9 @@
         	       				</td></tr>
     	            		</table>
 						</section>
-						<footer><input type="submit" name="bouton" value="Valider l'élève"> <a href="morceaugestion" class="bouton">Annuler</a></footer>
+						<footer>
+							<input type="submit" name="bouton" value="Valider l'élève"> <input type="submit" name="bouton" value="Annuler" form="formannuler"/>
+						</footer>
 					</form>
 				</div>
 			</div>

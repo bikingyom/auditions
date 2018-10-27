@@ -25,7 +25,9 @@
 		<p id="tempo">Vos modifications ont bien été enregistrées.</p>
 			<div class="conteneur-1200">
         		<div class="formulaire">
-        			<p id="tempo">Vos modifications ont bien été enregistrées.</p>
+        			<c:if test="${ displaySaveOk }">
+        				<p id="tempo">Vos modifications ont bien été enregistrées.</p>
+        			</c:if>
         			<header><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></header>
         			<section>
         				<c:if test="${ audition.morceaux.size() == 0 || audition.morceaux == null }">

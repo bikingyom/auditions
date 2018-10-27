@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 import javax.servlet.ServletException;
@@ -39,7 +38,7 @@ public class AuditionGestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("accueil");
+		response.sendRedirect("accueil?err=accesdirect");
 	}
 
 	/**
@@ -47,7 +46,7 @@ public class AuditionGestion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getSession(false) == null) {
-			response.sendRedirect("accueil");
+			response.sendRedirect("accueil?err=sessionexp");
 		}
 		else {
 			String action = request.getParameter("bouton");
@@ -77,6 +76,7 @@ public class AuditionGestion extends HttpServlet {
 					audition.addMorceau(recupNouveauMorceau(request));
 
 				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				request.setAttribute("displaySaveOk", true);
 				break;
 
 			case "Supprimer un morceau":
@@ -89,6 +89,7 @@ public class AuditionGestion extends HttpServlet {
 				} while (it.hasNext() && m.hashCode() != hashCode);
 				audition.removeMorceau(m);
 				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				request.setAttribute("displaySaveOk", true);
 				break;
 
 			default:

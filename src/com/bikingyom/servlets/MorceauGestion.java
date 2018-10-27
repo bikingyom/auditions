@@ -31,7 +31,7 @@ public class MorceauGestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("accueil");
+		response.sendRedirect("accueil?err=accesdirect");
 	}
 
 	/**
@@ -39,87 +39,80 @@ public class MorceauGestion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getSession(false) == null) {
-			response.sendRedirect("accueil");
+			response.sendRedirect("accueil?err=sessionexp");
 		}
 		else {
 			String action = request.getParameter("bouton");
-			if(action.equals("Annuler")) {
-				request.setAttribute("annuler", "true");
-				this.getServletContext().getRequestDispatcher("/WEB-INF/auditiongestion.jsp").forward(request, response);
-				//response.sendRedirect("auditiongestion?annuler=true");
-			}
-				
-			else {
-				HttpSession session = request.getSession(false);
-				switch (action) {
-				case "Supprimer un élève":
-					int hashCode = Integer.parseInt(request.getParameter("elevechoisi"));
-					Iterator<Eleve> it1 = elevesEdites.iterator();
-					Eleve e1;
-					do {
-						e1 = it1.next();
-					} while (it1.hasNext() && e1.hashCode() != hashCode);
-					elevesEdites.remove(e1);
-					break;
+			HttpSession session = request.getSession(false);
+			switch (action) {
+			case "Supprimer un élève":
+				int hashCode = Integer.parseInt(request.getParameter("elevechoisi"));
+				Iterator<Eleve> it1 = elevesEdites.iterator();
+				Eleve e1;
+				do {
+					e1 = it1.next();
+				} while (it1.hasNext() && e1.hashCode() != hashCode);
+				elevesEdites.remove(e1);
+				session.setAttribute("elevesEdites", elevesEdites);
+				break;
 
-				case "Valider l'élève":
-					if (request.getParameter("nom").isEmpty() || request.getParameter("nom") == null || request.getParameter("prenom").isEmpty() || request.getParameter("prenom") == null || request.getParameter("instrument").isEmpty() || request.getParameter("instrument") == null) {
-						request.setAttribute("erreur", "Soit vous avez un vieux navigateur, soit vous êtes très fort. Dans les deux cas, vous n'avez pas entré toutes les informations concernant l'élève à ajouter, merci de recommencer");
-					}
-					else {
-						Eleve nouvelEleve = new Eleve((String) request.getParameter("nom"), (String) request.getParameter("prenom"), (String) request.getParameter("instrument"));
-						elevesEdites.add(nouvelEleve);
-						session.setAttribute("elevesEdites", elevesEdites);	
-					}
-					break;
-
-				case "Valider la sélection":
-					String[] hashCodes = request.getParameterValues("listeeleves");
-					Audition audition = (Audition) session.getAttribute("audition");
-					TreeSet<Eleve> tousEleves = audition.getTousEleves();
-					for(String s : hashCodes) {
-						Iterator<Eleve> it = tousEleves.iterator();
-						Eleve e;
-						do {
-							e = it.next();
-						} while (it.hasNext() && e.hashCode() != Integer.parseInt(s));
-						elevesEdites.add(e);
-					}
+			case "Valider l'élève":
+				if (request.getParameter("nom").isEmpty() || request.getParameter("nom") == null || request.getParameter("prenom").isEmpty() || request.getParameter("prenom") == null || request.getParameter("instrument").isEmpty() || request.getParameter("instrument") == null) {
+					request.setAttribute("erreur", "Soit vous avez un vieux navigateur, soit vous êtes très fort. Dans les deux cas, vous n'avez pas entré toutes les informations concernant l'élève à ajouter, merci de recommencer");
+				}
+				else {
+					Eleve nouvelEleve = new Eleve((String) request.getParameter("nom"), (String) request.getParameter("prenom"), (String) request.getParameter("instrument"));
+					elevesEdites.add(nouvelEleve);
 					session.setAttribute("elevesEdites", elevesEdites);
-					break;
+				}
+				break;
 
-				case "Dupliquer les élèves":
-					if (request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty()) {
-						request.setAttribute("erreur", "Vous n'avez pas choisi le morceau dont vous voulez dupliquer les élèves. Merci de recommencer, ou pas, c'est vous qui voyez...");
-					}
-					else {
-						Morceau m = recupMorceau(session, request);
-						elevesEdites.addAll(m.getEleves());
-						session.setAttribute("elevesEdites", elevesEdites);
-					}
-					break;
+			case "Valider la sélection":
+				String[] hashCodes = request.getParameterValues("listeeleves");
+				Audition audition = (Audition) session.getAttribute("audition");
+				TreeSet<Eleve> tousEleves = audition.getTousEleves();
+				for(String s : hashCodes) {
+					Iterator<Eleve> it = tousEleves.iterator();
+					Eleve e;
+					do {
+						e = it.next();
+					} while (it.hasNext() && e.hashCode() != Integer.parseInt(s));
+					elevesEdites.add(e);
+				}
+				session.setAttribute("elevesEdites", elevesEdites);
+				break;
 
-				case "Ajouter un morceau":
-					session.setAttribute("modif", false);
-					morceauReset(session);
-					break;
-
-				case "Editer un morceau":
-					session.setAttribute("modif", true);
-					morceauReset(session);
+			case "Dupliquer les élèves":
+				if (request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty()) {
+					request.setAttribute("erreur", "Vous n'avez pas choisi le morceau dont vous voulez dupliquer les élèves. Merci de recommencer, ou pas, c'est vous qui voyez...");
+				}
+				else {
 					Morceau m = recupMorceau(session, request);
-					session.setAttribute("morceautmp", m);
-					session.setAttribute("morceauEnCoursEdition", m);
 					elevesEdites.addAll(m.getEleves());
 					session.setAttribute("elevesEdites", elevesEdites);
-					break;
-
-				default:
-					break;
 				}
+				break;
 
-				this.getServletContext().getRequestDispatcher("/WEB-INF/morceaugestion.jsp").forward(request, response);
+			case "Ajouter un morceau":
+				session.setAttribute("modif", false);
+				morceauReset(session);
+				break;
+
+			case "Editer un morceau":
+				session.setAttribute("modif", true);
+				morceauReset(session);
+				Morceau m = recupMorceau(session, request);
+				session.setAttribute("morceautmp", m); // mémoriser les infos en cas d'appel à la page elevesgestion
+				session.setAttribute("morceauEnCoursEdition", m); // identifier le morceau modifié dans son état initial pour le retrouver dans la liste des morceaux et pouvoir lui assigner les nouvelles valeurs
+				elevesEdites.addAll(m.getEleves());
+				session.setAttribute("elevesEdites", elevesEdites);
+				break;
+
+			default:
+				break;
 			}
+
+			this.getServletContext().getRequestDispatcher("/WEB-INF/morceaugestion.jsp").forward(request, response);
 		}
 	}
 

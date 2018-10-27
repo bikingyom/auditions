@@ -16,33 +16,37 @@ import com.bikingyom.beans.*;
 @WebServlet("/EleveGestion")
 public class EleveGestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-		
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EleveGestion() {
-        super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EleveGestion() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("accueil");
+		response.sendRedirect("accueil?err=accesdirect");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Audition audition = (Audition) session.getAttribute("audition");
-		TreeSet<Eleve> tousEleves = audition.getTousEleves();
-		request.setAttribute("tousEleves", tousEleves);
-		String dureeString = "PT" + request.getParameter("minutes") + "M" + request.getParameter("secondes") + "S";
-		Morceau morceautmp = new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), null);
-		session.setAttribute("morceautmp", morceautmp);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/elevesgestion.jsp").forward(request, response);
+		if (request.getSession(false) == null) {
+			response.sendRedirect("accueil?err=sessionexp");
+		}
+		else {
+			HttpSession session = request.getSession(false);
+			Audition audition = (Audition) session.getAttribute("audition");
+			TreeSet<Eleve> tousEleves = audition.getTousEleves();
+			request.setAttribute("tousEleves", tousEleves);
+			String dureeString = "PT" + request.getParameter("minutes") + "M" + request.getParameter("secondes") + "S";
+			Morceau morceautmp = new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), null);
+			session.setAttribute("morceautmp", morceautmp);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/elevesgestion.jsp").forward(request, response);
+		}
 	}
-
 }
