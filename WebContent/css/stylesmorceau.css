@@ -201,3 +201,35 @@ tbody tr {
 	width: 50px;
 	text-align: center;
 }
+
+#tempo {
+	background: #36304a;
+	font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: unset;
+    text-align: center;
+	border-radius:5px;
+	border: 1px solid white;
+    position:absolute;
+    width:500px;
+    left:50%;
+    top: 20px;
+    margin-left:-250px;
+	animation-name: example;
+	animation-duration: 4s;
+	opacity: 0;
+}
+
+@keyframes example {
+    from {
+    	opacity: 1;
+    	
+    }
+    to {
+    	opacity: 0;
+    	
+    }
+}
+

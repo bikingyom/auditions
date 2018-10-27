@@ -28,6 +28,21 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession(true);
+		String err = request.getParameter("err");
+		if (err == null)
+			err = "vide";
+		switch (err) {
+		case "accesdirect":
+			request.setAttribute("erreur", "Il est impossible d'accéder directement à la page demandée. Vous avez donc été redirigé à la page d'accueil.");
+			break;
+			
+		case "sessionexp":
+			request.setAttribute("erreur", "Votre session a expiré. Vous avez donc été redirigé à la page d'accueil.");
+			break;
+			
+		default:
+			break;
+		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
 
