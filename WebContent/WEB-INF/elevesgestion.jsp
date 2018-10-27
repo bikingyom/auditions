@@ -10,7 +10,7 @@
 		<form action="morceaugestion" method="post" id="formannuler"></form>
 		<div class="limiter">
 			<div class="conteneur-600">
-				<c:if test="${ audition.morceaux.size() != 0 && audition.morceaux != null }">
+				<c:if test="${ !(empty audition.morceaux || audition.morceaux == null) }">
 	       			<div class="formulaire">
        					<form action="morceaugestion" method="post">
        						<header><h1>Sélection parmi les élèves déjà inscrits à l'audition</h1></header>

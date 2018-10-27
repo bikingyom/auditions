@@ -31,50 +31,52 @@
         			</c:if>
         			<header><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></header>
         			<section>
-        				<c:if test="${ sessionScope.audition.morceaux.size() == 0 || sessionScope.audition.morceaux == null }">
-							<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
-						</c:if>
-						<c:if test="${ sessionScope.audition.morceaux.size() != 0 && sessionScope.audition.morceaux != null }">
-							<table>
-	        					<thead>
-    	    						<tr>
-        								<th>&nbsp;</th>
-        								<th>Titre de l'oeuvre</th>
-        								<th>Compositeur</th>
-        								<th>Arrangeur</th>
-        								<th>Durée</th>
-        								<th>Chaises</th>
-        								<th>Pupitres</th>
-        								<th>Matériel</th>
-        								<th>Élèves</th>
-	        						</tr>
-    	    					</thead>
-        						<tbody>
-        							<c:set var="i" value="0" scope="page" />
-        							<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
-        								<c:set var="i" value="${ i+1 }" scope="page" />
-        								<tr>
-        									<td class="column-radio">
-												<input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }" form="formmorceau" ${ i == 1 ? 'checked="checked"' : '' } />
-											</td>
-        									<td class="column1"><c:out value="${ morceau.titre }" /></td>
-        									<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
-        									<td class="column3"><c:out value="${ morceau.arrangeur }" />&nbsp;</td>
-        									<td class="column4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></td>
-        									<td class="column5"><c:out value="${ morceau.chaises }" /></td>
-        									<td class="column6"><c:out value="${ morceau.pupitres }" /></td>
-	        								<td class="column7"><c:out value="${ morceau.materiel }" />&nbsp;</td>
-    	    								<td class="column7">
-        										<c:forEach var="eleve" items="${ morceau.eleves }">
-        											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
-        										</c:forEach>
-        									</td>
-        								</tr>
-        							</c:forEach>
-        							<c:remove var="i" scope="page" />
-	        					</tbody>
-    	    				</table>
-    	    			</c:if>
+        				<c:choose>
+	        				<c:when test="${ empty sessionScope.audition.morceaux || sessionScope.audition.morceaux == null }">
+								<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
+							</c:when>
+							<c:otherwise>
+								<table>
+	        						<thead>
+    	    							<tr>
+        									<th>&nbsp;</th>
+        									<th>Titre de l'oeuvre</th>
+        									<th>Compositeur</th>
+        									<th>Arrangeur</th>
+	        								<th>Durée</th>
+    	    								<th>Chaises</th>
+        									<th>Pupitres</th>
+        									<th>Matériel</th>
+        									<th>Élèves</th>
+	        							</tr>
+    	    						</thead>
+        							<tbody>
+        								<c:set var="i" value="0" scope="page" />
+        								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
+        									<c:set var="i" value="${ i+1 }" scope="page" />
+	        								<tr>
+    	    									<td class="column-radio">
+													<input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }" form="formmorceau" ${ i == 1 ? 'checked="checked"' : '' } />
+												</td>
+        										<td class="column1"><c:out value="${ morceau.titre }" /></td>
+        										<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
+        										<td class="column3"><c:out value="${ morceau.arrangeur }" />&nbsp;</td>
+        										<td class="column4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></td>
+        										<td class="column5"><c:out value="${ morceau.chaises }" /></td>
+        										<td class="column6"><c:out value="${ morceau.pupitres }" /></td>
+	        									<td class="column7"><c:out value="${ morceau.materiel }" />&nbsp;</td>
+    	    									<td class="column7">
+        											<c:forEach var="eleve" items="${ morceau.eleves }">
+	        											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
+    	    										</c:forEach>
+        										</td>
+        									</tr>
+        								</c:forEach>
+        								<c:remove var="i" scope="page" />
+	        						</tbody>
+    	    					</table>
+    	    				</c:otherwise>
+    	    			</c:choose>
         			</section>
         			<footer>
         				<form action="" onsubmit="" method="post" id="formmorceau">

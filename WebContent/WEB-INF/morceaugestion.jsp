@@ -37,7 +37,7 @@
 					</section>
 					<footer>
 						<form action="auditiongestion" method="post" id="formannuler"></form>
-						<input type="submit" name="bouton" value="Valider le morceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'disabled' : '' } onclick="lancer(this)" form="formmorceau" />
+						<input type="submit" name="bouton" value="Valider le morceau" ${ empty elevesEdites || elevesEdites == null ? 'disabled' : '' } onclick="lancer(this)" form="formmorceau" />
 						<input type="submit" name="bouton" value="Annuler" form="formannuler"/>
 					</footer>
 				</div>
@@ -45,10 +45,10 @@
 				<div class="formulaire">
 					<header><h1>Élèves concernés par ce morceau</h1></header>
 					<section>
-						<c:if test="${ elevesEdites.size() == 0 || elevesEdites == null }">
+						<c:if test="${ empty elevesEdites || elevesEdites == null }">
 							<p>Il n'y a pas encore d'élève pour ce morceau, veuillez en ajouter.</p>
 						</c:if>
-						<c:if test="${ elevesEdites.size() != 0 && elevesEdites != null }">
+						<c:if test="${ !(empty elevesEdites || elevesEdites == null) }">
     		  				<table>
        							<c:set var="i" value="0" scope="page" />
        							<c:forEach var="eleve" items="${ elevesEdites }">
@@ -64,8 +64,8 @@
 	       						</c:forEach>
 	       						<c:remove var="i" scope="page" />
     	    				</table>
-        					</c:if>
-        				<c:if test="${ !(erreur.length() == 0 || erreur == null) }">
+        				</c:if>
+        				<c:if test="${ !(empty erreur || erreur == null) }">
 	        				<p><c:out value="${ erreur }" /></p>
 	        			</c:if>
     	    		</section>
