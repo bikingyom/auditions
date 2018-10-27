@@ -14,20 +14,6 @@ body, html {
 	font-family: sans-serif;
 }
 
-a.bouton {
-    background: linear-gradient(0deg, #666666, #eeeeee);
-	border-radius: 5px;
-    padding: 5px 15px;
-    color: black;
-    cursor: pointer;
-    font-family: sans-serif;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: normal;
-    outline: none;
-    border: 1px solid black;
-}
-
 h1 {
 	font-family: OpenSans-Regular;
     font-size: 18px;
@@ -125,6 +111,52 @@ header.menu {
     border-radius: 0px 0px 10px 10px;
 }
 
+#bouton-haut, #bouton-bas {
+	height: 50px;
+	width: 50px;
+	font-size: 0px;
+	border: 0px;
+	padding: 0px;
+	margin: 0 auto;
+}
+#bouton-haut {
+	background-image: url("../images/haut.png");
+}
+#bouton-haut:hover {
+	opacity: 0.7;
+}
+#bouton-haut:active {
+	opacity: 0.2;
+}
+
+#bouton-bas {
+	background-image: url("../images/bas.png");
+}
+#bouton-bas:hover {
+	opacity: 0.7;
+}
+#bouton-bas:active {
+	opacity: 0.2;
+}
+
+#boutons-ordre {
+	background: #36304a;
+    padding: 0px 10px 0px 10px;
+    height: 100px;
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    z-index: 8;
+    border-radius: 10px;
+    border: 1px solid white;
+    align-items: center;
+    justify-content: center;
+    margin-top: -50px;
+}
+
 input[type="text"],
  input[type="number"],
  input[type="time"] {
@@ -147,6 +179,10 @@ input[type="submit"] {
     margin: 2px;
 }
 
+input[type="submit"]:active {
+	opacity: 0.5;
+}
+
 label:hover {
 	cursor: pointer;
 	color: #222;
@@ -161,7 +197,7 @@ select.eleves {
 table {
   border-spacing: 1;
   border-collapse: collapse;
-  background: #eee;
+  background: #fff;
   overflow: hidden;
   width: 100%;
   margin: 0 auto;
@@ -188,7 +224,7 @@ table td, table th {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #ccc;
+  background-color: #eee;
 }
 
 tbody tr {

@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.TreeSet;
 
@@ -78,7 +79,42 @@ public class AuditionGestion extends HttpServlet {
 				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
 				request.setAttribute("displaySaveOk", true);
 				break;
-
+				
+			case "Changer l'ordre":
+				request.setAttribute("ordre", true);
+				request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+				break;
+				
+			case "haut":
+				Morceau m3 = recupMorceauChoisi(request);
+				if (m3 != null) {
+					int ind = audition.getMorceaux().indexOf(m3);
+					if (ind > 0) {
+						Collections.swap(audition.getMorceaux(), ind, ind-1);
+					}
+					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+				}
+				request.setAttribute("ordre", true);
+				break;
+				
+			case "bas":
+				Morceau m4 = recupMorceauChoisi(request);
+				if (m4 != null) {
+					int ind = audition.getMorceaux().indexOf(m4);
+					if (ind < audition.getMorceaux().size()-1) {
+						Collections.swap(audition.getMorceaux(), ind, ind+1);
+					}
+					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+				}
+				request.setAttribute("ordre", true);
+				break;
+				
+			case "Valider l'ordre":
+				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				request.setAttribute("displaySaveOk", true);
+				request.setAttribute("ordre", false);
+				break;
+				
 			case "Supprimer un morceau":
 				int hashCode = Integer.parseInt(request.getParameter("morceauchoisi"));
 				Iterator<Morceau> it = audition.getMorceaux().iterator();
@@ -95,8 +131,8 @@ public class AuditionGestion extends HttpServlet {
 				
 			case "Restaurer":
 				String[] hashCodes = request.getParameterValues("morceauxchoisis");
-				if(hashCodes != null && hashCodes.length != 0) {
-					ArrayList<Morceau> morceauxSuppr = audition.getMorceauxSuppr();
+				ArrayList<Morceau> morceauxSuppr = audition.getMorceauxSuppr();
+				if(hashCodes != null && hashCodes.length != 0 && morceauxSuppr != null) {
 					for(String s : hashCodes) {
 						Iterator<Morceau> it2 = morceauxSuppr.iterator();
 						Morceau m2;
@@ -127,6 +163,19 @@ public class AuditionGestion extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		TreeSet<Eleve> listeEleves = (TreeSet<Eleve>) ((TreeSet<Eleve>)session.getAttribute("elevesEdites")).clone();
 		return new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), listeEleves);
+	}
+	
+	private Morceau recupMorceauChoisi(HttpServletRequest request) {
+		int hashCode = Integer.parseInt(request.getParameter("morceauchoisi"));
+		Iterator<Morceau> it = audition.getMorceaux().iterator();
+		Morceau m;
+		do {
+			m = it.next();
+		} while (it.hasNext() && m.hashCode() != hashCode);
+		if (m.hashCode() == hashCode)
+			return m;
+		else
+			return null;
 	}
 
 }

@@ -8,12 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript">
 			function lancer(elt) {
-				if(elt.value == 'Supprimer un morceau')
-					document.forms[0].action='auditiongestion';
+				if(elt.value == "Ajouter un morceau" || elt.value == "Editer un morceau" )
+					document.forms[0].action='morceaugestion';
 				else if(elt.value == 'Restaurer des morceaux')
 					document.forms[0].action='restaurermorceaux';
 				else
-					document.forms[0].action='morceaugestion';
+					document.forms[0].action='auditiongestion';
 			}
   		</script>
 	</head>
@@ -36,6 +36,12 @@
 								<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
 							</c:when>
 							<c:otherwise>
+								<c:if test="${ ordre }">
+									<div id="boutons-ordre">
+										<input type="submit" name="bouton" value="haut" form="formmorceau" id="bouton-haut" onclick="lancer(this)" />
+										<input type="submit" name="bouton" value="bas" form="formmorceau" id="bouton-bas" onclick="lancer(this)" />
+									</div>
+								</c:if>
 								<table>
 	        						<thead>
     	    							<tr>
@@ -56,7 +62,8 @@
         									<c:set var="i" value="${ i+1 }" scope="page" />
 	        								<tr>
     	    									<td class="column-radio">
-													<input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }" form="formmorceau" ${ i == 1 ? 'checked="checked"' : '' } />
+    	    									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" /> 
+													<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
 												</td>
         										<td class="column1"><c:out value="${ morceau.titre }" /></td>
         										<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
@@ -80,10 +87,18 @@
         			</section>
         			<footer>
         				<form action="" onsubmit="" method="post" id="formmorceau">
-							<input type="submit" name="bouton" value="Ajouter un morceau" onclick="lancer(this)" title="Ajouter un nouveau morceau à l'audition" />
-							<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Modifier le morceau sélectionné" />
-							<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Supprimer le morceau sélectionné" />
-							<input type="submit" name="bouton" value="Restaurer des morceaux" onclick="lancer(this)" ${ empty sessionScope.audition.morceauxSuppr ? 'class="display-none"' : '' } title="Afficher la corbeille et restaurer un ou plusieurs morceaux"/>
+        					<c:choose>
+        						<c:when test="${ ordre }">
+        							<input type="submit" name="bouton" value="Valider l'ordre" onclick="lancer(this)" title="Valider et enregistrer le nouvel ordre des morceaux" />
+        						</c:when>
+        						<c:otherwise>
+									<input type="submit" name="bouton" value="Ajouter un morceau" onclick="lancer(this)" title="Ajouter un nouveau morceau à l'audition" />
+									<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Modifier le morceau sélectionné" />
+									<input type="submit" name="bouton" value="Changer l'ordre" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Modifier l'ordre des morceaux en faisant monter ou descenddre le morceau sélectionné" />
+									<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Supprimer le morceau sélectionné" />
+									<input type="submit" name="bouton" value="Restaurer des morceaux" onclick="lancer(this)" ${ empty sessionScope.audition.morceauxSuppr ? 'class="display-none"' : '' } title="Afficher la corbeille et restaurer un ou plusieurs morceaux"/>
+								</c:otherwise>
+							</c:choose>
 						</form>
 					</footer>
         		</div>
