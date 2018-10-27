@@ -70,8 +70,8 @@
 	        			</c:if>
     	    		</section>
         			<footer>
-        				<input type="submit" name="bouton" value="Ajouter un élève" onclick="lancer(this)" form="formmorceau" />
-        				<input type="submit" name="bouton" value="Supprimer un élève" onclick="lancer(this)" form="formmorceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'class="display-none"' : '' } />
+        				<input type="submit" name="bouton" value="Ajouter un élève" onclick="lancer(this)" form="formmorceau" title="Ajouter un ou plusieurs élèves à ce morceau" />
+        				<input type="submit" name="bouton" value="Supprimer un élève" onclick="lancer(this)" form="formmorceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'class="display-none"' : '' } title="Supprimer l'élève sélectionné" />
 					</footer>
 				</div>
 			</div>

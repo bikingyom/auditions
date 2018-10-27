@@ -80,10 +80,10 @@
         			</section>
         			<footer>
         				<form action="" onsubmit="" method="post" id="formmorceau">
-							<input type="submit" name="bouton" value="Ajouter un morceau" onclick="lancer(this)" />
-							<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } />
-							<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } />
-							<input type="submit" name="bouton" value="Restaurer des morceaux" onclick="lancer(this)" ${ empty sessionScope.audition.morceauxSuppr ? 'class="display-none"' : '' } />
+							<input type="submit" name="bouton" value="Ajouter un morceau" onclick="lancer(this)" title="Ajouter un nouveau morceau à l'audition" />
+							<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Modifier le morceau sélectionné" />
+							<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } title="Supprimer le morceau sélectionné" />
+							<input type="submit" name="bouton" value="Restaurer des morceaux" onclick="lancer(this)" ${ empty sessionScope.audition.morceauxSuppr ? 'class="display-none"' : '' } title="Afficher la corbeille et restaurer un ou plusieurs morceaux"/>
 						</form>
 					</footer>
         		</div>
