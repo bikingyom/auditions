@@ -36,7 +36,6 @@
                 		</form>
 					</section>
 					<footer>
-						<!--<a href="auditiongestion" class="bouton">Annuler</a>-->
 						<form action="auditiongestion" method="post" id="formannuler"></form>
 						<input type="submit" name="bouton" value="Valider le morceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'disabled' : '' } onclick="lancer(this)" form="formmorceau" />
 						<input type="submit" name="bouton" value="Annuler" form="formannuler"/>
@@ -56,7 +55,7 @@
        								<c:set var="i" value="${ i+1 }" scope="page" />
        								<tr>
        									<td class="column-radio">
-											<input type="radio" name="elevechoisi" value="${ eleve.hashCode() }" id="${ eleve.hashCode() }" form="formmorceau" ${ i == 1 ? 'checked="checked"' : '' } />
+											<input type="radio" name="elevechoisi" value="${ eleve.hashCode() }" id="${ eleve.hashCode() }" form="formmorceau" />
 										</td>
        									<td class="column1"><c:out value="${ eleve.nom }" /></td>
        									<td class="column2"><c:out value="${ eleve.prenom }" /></td>
@@ -72,7 +71,7 @@
     	    		</section>
         			<footer>
         				<input type="submit" name="bouton" value="Ajouter un élève" onclick="lancer(this)" form="formmorceau" />
-        				<input type="submit" name="bouton" value="Supprimer un élève" onclick="lancer(this)" form="formmorceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'disabled' : '' } />
+        				<input type="submit" name="bouton" value="Supprimer un élève" onclick="lancer(this)" form="formmorceau" ${ elevesEdites.size() == 0 || elevesEdites == null ? 'class="display-none"' : '' } />
 					</footer>
 				</div>
 			</div>

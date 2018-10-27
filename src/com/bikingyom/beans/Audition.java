@@ -75,7 +75,11 @@ public class Audition {
     	this.morceaux.remove(morceau);
     }
     
-    public TreeSet<Eleve> getTousEleves() {
+    public ArrayList<Morceau> getMorceauxSuppr() {
+		return morceauxSuppr;
+	}
+
+	public TreeSet<Eleve> getTousEleves() {
     	TreeSet<Eleve> eleves = new TreeSet<Eleve>();
     	if (morceaux != null && !morceaux.isEmpty()) {
     		for (Morceau morceau : morceaux) {
@@ -89,5 +93,9 @@ public class Audition {
 
 	public void swapMorceaux(int i, int j) {
 		Collections.swap(this.morceaux, i, j);
+	}
+
+	public void removeMorceauSuppr(Morceau m) {
+		this.morceauxSuppr.remove(m);
 	}
 }

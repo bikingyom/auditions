@@ -10,6 +10,8 @@
 			function lancer(elt) {
 				if(elt.value == 'Supprimer un morceau')
 					document.forms[0].action='auditiongestion';
+				else if(elt.value == 'Restaurer des morceaux')
+					document.forms[0].action='restaurermorceaux';
 				else
 					document.forms[0].action='morceaugestion';
 			}
@@ -22,7 +24,6 @@
 			</form>
 		</header> -->
 		<div class="limiter">
-		<p id="tempo">Vos modifications ont bien été enregistrées.</p>
 			<div class="conteneur-1200">
         		<div class="formulaire">
         			<c:if test="${ displaySaveOk }">
@@ -30,10 +31,10 @@
         			</c:if>
         			<header><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></header>
         			<section>
-        				<c:if test="${ audition.morceaux.size() == 0 || audition.morceaux == null }">
+        				<c:if test="${ sessionScope.audition.morceaux.size() == 0 || sessionScope.audition.morceaux == null }">
 							<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
 						</c:if>
-						<c:if test="${ audition.morceaux.size() != 0 && audition.morceaux != null }">
+						<c:if test="${ sessionScope.audition.morceaux.size() != 0 && sessionScope.audition.morceaux != null }">
 							<table>
 	        					<thead>
     	    						<tr>
@@ -50,7 +51,7 @@
     	    					</thead>
         						<tbody>
         							<c:set var="i" value="0" scope="page" />
-        							<c:forEach var="morceau" items="${ audition.morceaux }">
+        							<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
         								<c:set var="i" value="${ i+1 }" scope="page" />
         								<tr>
         									<td class="column-radio">
@@ -59,7 +60,7 @@
         									<td class="column1"><c:out value="${ morceau.titre }" /></td>
         									<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
         									<td class="column3"><c:out value="${ morceau.arrangeur }" />&nbsp;</td>
-        									<td class="column4"><c:out value="${ morceau.duree.toMinutes() }" />&apos;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></td>
+        									<td class="column4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></td>
         									<td class="column5"><c:out value="${ morceau.chaises }" /></td>
         									<td class="column6"><c:out value="${ morceau.pupitres }" /></td>
 	        								<td class="column7"><c:out value="${ morceau.materiel }" />&nbsp;</td>
@@ -78,8 +79,9 @@
         			<footer>
         				<form action="" onsubmit="" method="post" id="formmorceau">
 							<input type="submit" name="bouton" value="Ajouter un morceau" onclick="lancer(this)" />
-							<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" />
-							<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" />
+							<input type="submit" name="bouton" value="Editer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } />
+							<input type="submit" name="bouton" value="Supprimer un morceau" onclick="lancer(this)" ${ empty sessionScope.audition.morceaux ? 'class="display-none"' : '' } />
+							<input type="submit" name="bouton" value="Restaurer des morceaux" onclick="lancer(this)" ${ empty sessionScope.audition.morceauxSuppr ? 'class="display-none"' : '' } />
 						</form>
 					</footer>
         		</div>

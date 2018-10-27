@@ -32,6 +32,14 @@
     <servlet-name>EleveGestion</servlet-name>
     <url-pattern>/elevesgestion</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>RestaurerMorceaux</servlet-name>
+    <servlet-class>com.bikingyom.servlets.RestaurerMorceaux</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestaurerMorceaux</servlet-name>
+    <url-pattern>/restaurermorceaux</url-pattern>
+  </servlet-mapping>
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>

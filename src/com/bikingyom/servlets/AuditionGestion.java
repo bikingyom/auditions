@@ -81,15 +81,34 @@ public class AuditionGestion extends HttpServlet {
 
 			case "Supprimer un morceau":
 				int hashCode = Integer.parseInt(request.getParameter("morceauchoisi"));
-				Audition audition = (Audition) session.getAttribute("audition");
 				Iterator<Morceau> it = audition.getMorceaux().iterator();
 				Morceau m;
 				do {
 					m = it.next();
 				} while (it.hasNext() && m.hashCode() != hashCode);
-				audition.removeMorceau(m);
-				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
-				request.setAttribute("displaySaveOk", true);
+				if (m.hashCode() == hashCode) {
+					audition.removeMorceau(m);
+					donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+					request.setAttribute("displaySaveOk", true);
+				}
+				break;
+				
+			case "Restaurer":
+				String[] hashCodes = request.getParameterValues("morceauxchoisis");
+				if(hashCodes != null && hashCodes.length != 0) {
+					ArrayList<Morceau> morceauxSuppr = audition.getMorceauxSuppr();
+					for(String s : hashCodes) {
+						Iterator<Morceau> it2 = morceauxSuppr.iterator();
+						Morceau m2;
+						do {
+							m2 = it2.next();
+						} while (it2.hasNext() && m2.hashCode() != Integer.parseInt(s));
+						audition.addMorceau(m2);
+						audition.removeMorceauSuppr(m2);
+						donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+						request.setAttribute("displaySaveOk", true);
+					}
+				}
 				break;
 
 			default:

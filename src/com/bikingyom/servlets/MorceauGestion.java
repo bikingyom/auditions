@@ -46,14 +46,22 @@ public class MorceauGestion extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			switch (action) {
 			case "Supprimer un élève":
-				int hashCode = Integer.parseInt(request.getParameter("elevechoisi"));
-				Iterator<Eleve> it1 = elevesEdites.iterator();
-				Eleve e1;
-				do {
-					e1 = it1.next();
-				} while (it1.hasNext() && e1.hashCode() != hashCode);
-				elevesEdites.remove(e1);
-				session.setAttribute("elevesEdites", elevesEdites);
+				if (request.getParameter("elevechoisi") == null || request.getParameter("elevechoisi").isEmpty())
+				{
+					request.setAttribute("erreur", "Choisissez d'abord un élève à supprimer, puis cliquez sur le bouton Supprimer.");
+				}
+				else {
+					int hashCode = Integer.parseInt(request.getParameter("elevechoisi"));
+					Iterator<Eleve> it1 = elevesEdites.iterator();
+					Eleve e1;
+					do {
+						e1 = it1.next();
+					} while (it1.hasNext() && e1.hashCode() != hashCode);
+					if (e1.hashCode() == hashCode) {
+						elevesEdites.remove(e1);
+						session.setAttribute("elevesEdites", elevesEdites);
+					}
+				}
 				break;
 
 			case "Valider l'élève":
