@@ -33,7 +33,9 @@
 
 @media screen and (max-width: 990px) {
 	.hidden { display: inline; margin: 0px; }
-	.apasserinline { display: inline; }
+	.grand { display: none; }
+	.petit { display: block; }
+	.morceau-inline { display: inline; }
 	#elt1, #elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 { display: inline; width: auto; line-height: 1.5; margin: 0px; }
 	/*input[type="radio"] { position:relative; top: 2px;}*/
 	

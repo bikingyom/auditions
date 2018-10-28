@@ -221,6 +221,7 @@ select.eleves {
 
 .bloc-morceau {
   	position: relative;
+  	padding: 0px;
 }
 
 .bloc-morceau:nth-child(even) { background-color: #eee; }
@@ -239,6 +240,18 @@ select.eleves {
     width: 100%;
     padding: 10px;
 }
+.morceau-inline {
+	display: none;
+/*	font-family: OpenSans-Regular;
+  	font-size: 15px;
+  	line-height: 1.2;
+  	font-weight: unset;
+	position: relative;
+    width: 100%;
+    padding: 0px;*/
+}
+
+.petit { display: none; }
 
 label.radiolabel {
     display: block;

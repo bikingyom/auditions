@@ -49,36 +49,50 @@
        								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
        									<c:set var="i" value="${ i+1 }" scope="page" />
        									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
-        								<!--  -->
         								<div class="bloc-morceau">
-        								<label class="radiolabel" for="${ hashLocal }"></label>
+	        								<label class="radiolabel" for="${ hashLocal }"></label>
         									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
    	    									<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
-   	    								<div class="contenu-morceau">
-   	    								<div class="apasserinline">
-											<div id="elt2"><c:out value="${ morceau.titre }" /></div>
-											<div class="hidden"><c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '- ' }" /></div>
-											<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />
-											<div class="hidden">Durée : </div>
-       										<div id="elt4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></div>
-       										<div class="hidden">- Chaises : </div>
-       										<div id="elt5"><c:out value="${ morceau.chaises }" /></div>
-       										<div class="hidden">- Pupitres : </div>
-       										<div id="elt6"><c:out value="${ morceau.pupitres }" /></div><br />
-        									<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><div class="hidden">Matériel : </div></c:if>
-        									<div id="elt7"><c:out value="${ morceau.materiel }" /></div>
-        									<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><br /></c:if>
-   	    									<div class="hidden">Élèves : </div>
-   	    									<div id="elt8">
+   	    									<div class="contenu-morceau grand">
+												<div id="elt2"><c:out value="${ morceau.titre }" /></div>
+												<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />
+    	   										<div id="elt4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></div>
+       											<div id="elt5"><c:out value="${ morceau.chaises }" /></div>
+       											<div id="elt6"><c:out value="${ morceau.pupitres }" /></div><br />
+        										<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><div class="hidden">Matériel : </div></c:if>
+        										<div id="elt7"><c:out value="${ morceau.materiel }" /></div>
+        										<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><br /></c:if>
+   	    										<div id="elt8">
 	       										<c:forEach var="eleve" items="${ morceau.eleves }">
     	   											<c:set var="j" value="${ j+1 }" scope="page" />
         											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
    	    										</c:forEach>
+   	    										</div>
+   	    									</div>
+   	    									<div class="contenu-morceau petit">
+	   	    									<div class="morceau-inline">
+													<div id="elt2"><c:out value="${ morceau.titre }" /></div>
+													<div class="hidden"><c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '- ' }" /></div>
+													<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />
+													<div class="hidden">Durée : </div>
+       												<div id="elt4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></div>
+       												<div class="hidden">- Chaises : </div>
+       												<div id="elt5"><c:out value="${ morceau.chaises }" /></div>
+       												<div class="hidden">- Pupitres : </div>
+       												<div id="elt6"><c:out value="${ morceau.pupitres }" /></div><br />
+        											<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><div class="hidden">Matériel : </div></c:if>
+        											<div id="elt7"><c:out value="${ morceau.materiel }" /></div>
+        											<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><br /></c:if>
+		   	    									<div class="hidden">Élèves : </div>
+   			    									<div id="elt8">
+	    		   										<c:forEach var="eleve" items="${ morceau.eleves }">
+    	   													<c:set var="j" value="${ j+1 }" scope="page" />
+        													<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
+   	    												</c:forEach>
+   	    											</div>
+   	    										</div>
    	    									</div>
    	    								</div>
-   	    								</div>
-       									</div>
-       									<!-- </label> -->
        								</c:forEach>
        								<c:remove var="i" scope="page" />
     	    					</div>
