@@ -76,7 +76,7 @@ header.menu {
 }
 
 .conteneur-1200 {
-  width: 1240px;
+  width: 100%;/*1240px;*/
 }
 
 .formulaire {
@@ -212,6 +212,66 @@ select.eleves {
 	margin: auto;
 }
 
+.bloc-tableau {
+	background-color: #fff;
+	width: 100%;
+  	margin: 0 auto;
+  	display: flex;
+  	flex-direction:column;
+}
+
+.bloc-morceau {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: OpenSans-Regular;
+  	font-size: 15px;
+  	line-height: 1.2;
+  	font-weight: unset;
+}
+
+.bloc-morceau:nth-child(even) {
+	background-color: #0e0e0e;
+}
+
+#elt1, #elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 {
+	margin: 5px;
+} 
+
+#elt1 {
+	min-width: 50px;
+	text-align: center;
+}
+#elt2 {
+	width: 230px;
+	flex-grow: 2;
+}
+#elt3 {
+	width: 150px;
+	flex-grow: 2;
+}
+#elt4 {
+	width: 70px;
+}
+#elt5 {
+	width: 70px;
+}
+#elt6 {
+	width: 70px;
+}
+#elt7 {
+	width: 250px;
+	flex-grow: 2;
+}
+#elt8 {
+	width: 250px;
+	flex-grow: 1.5;
+}
+
+.hidden {
+	display: none;
+}
+
 table {
   border-spacing: 1;
   border-collapse: collapse;
@@ -230,11 +290,11 @@ table td, table th {
   padding-right: 5px;
 }
 table thead tr {
-  height: 60px;
+  height: 50px;
   background: #ccc;
 }
 table tbody tr {
-  height: 50px;
+  height: 40px;
 }
 
 table td, table th {

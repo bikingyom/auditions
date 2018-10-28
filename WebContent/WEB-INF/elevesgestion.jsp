@@ -39,7 +39,7 @@
 											</td>
     										<td>
     											<label for="${ morceau.hashCode() }">
-    												<c:out value="${ morceau.titre }" /> de <c:out value="${ morceau.compositeur }" />
+    												<c:out value="${ morceau.titre }" /> <c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '-' }" /> <c:out value="${ morceau.compositeur }" />
     											</label>
     										</td>
    											<td>

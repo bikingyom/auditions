@@ -164,7 +164,7 @@ public class AuditionGestion extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		@SuppressWarnings("unchecked")
 		TreeSet<Eleve> listeEleves = (TreeSet<Eleve>) ((TreeSet<Eleve>)session.getAttribute("elevesEdites")).clone();
-		return new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), request.getParameter("arrangeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), listeEleves);
+		return new Morceau(request.getParameter("titre"), request.getParameter("compositeur"), Duration.parse(dureeString), Integer.parseInt(request.getParameter("chaises")), Integer.parseInt(request.getParameter("pupitres")), request.getParameter("materiel"), listeEleves);
 	}
 	
 	private Morceau recupMorceauChoisi(HttpServletRequest request) {

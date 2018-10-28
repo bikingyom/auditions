@@ -44,47 +44,39 @@
 										<input type="submit" name="bouton" value="bas" form="formmorceau" id="bouton-bas" onclick="lancer(this)" />
 									</div>
 								</c:if>
-								<table>
-	        						<thead>
-    	    							<tr>
-        									<th>&nbsp;</th>
-        									<th>Titre de l'oeuvre</th>
-        									<th>Compositeur</th>
-        									<th>Arrangeur</th>
-	        								<th>Durée</th>
-    	    								<th>Chaises</th>
-        									<th>Pupitres</th>
-        									<th>Matériel</th>
-        									<th>Élèves</th>
-	        							</tr>
-    	    						</thead>
-        							<tbody>
-        								<c:set var="i" value="0" scope="page" />
-        								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
-        									<c:set var="i" value="${ i+1 }" scope="page" />
-	        								<tr>
-    	    									<td class="column-radio">
-    	    									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
-    	    									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
-													<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
-												</td>
-        										<td class="column1"><c:out value="${ morceau.titre }" /></td>
-        										<td class="column2"><c:out value="${ morceau.compositeur }" />&nbsp;</td>
-        										<td class="column3"><c:out value="${ morceau.arrangeur }" />&nbsp;</td>
-        										<td class="column4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></td>
-        										<td class="column5"><c:out value="${ morceau.chaises }" /></td>
-        										<td class="column6"><c:out value="${ morceau.pupitres }" /></td>
-	        									<td class="column7"><c:out value="${ morceau.materiel }" />&nbsp;</td>
-    	    									<td class="column7">
-        											<c:forEach var="eleve" items="${ morceau.eleves }">
-	        											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
-    	    										</c:forEach>
-        										</td>
-        									</tr>
-        								</c:forEach>
-        								<c:remove var="i" scope="page" />
-	        						</tbody>
-    	    					</table>
+    	    					<div class="bloc-tableau">
+      								<c:set var="i" value="0" scope="page" />
+       								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
+       									<c:set var="i" value="${ i+1 }" scope="page" />
+       									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
+        								<label for="${ hashLocal }">
+        								<div class="bloc-morceau">
+        									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
+   	    									<div id="elt1"><input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } /></div>
+											<div id="elt2"><c:out value="${ morceau.titre }" /></div>
+											<div class="hidden"><c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '- ' }" /></div>
+											<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />
+											<div class="hidden">Durée : </div>
+       										<div id="elt4"><c:out value="${ morceau.duree.toMinutes() }" />&#39;<c:out value="${ morceau.duree.getSeconds()%60 == 0 ? '00' : morceau.duree.getSeconds()%60 }" /></div>
+       										<div class="hidden">- Chaises : </div>
+       										<div id="elt5"><c:out value="${ morceau.chaises }" /></div>
+       										<div class="hidden">- Pupitres : </div>
+       										<div id="elt6"><c:out value="${ morceau.pupitres }" /></div><br />
+        									<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><div class="hidden">Matériel : </div></c:if>
+        									<div id="elt7"><c:out value="${ morceau.materiel }" /></div>
+        									<c:if test="${ !(empty morceau.materiel || morceau.materiel == null) }"><br /></c:if>
+   	    									<div class="hidden">Élèves : </div>
+   	    									<div id="elt8">
+	       										<c:forEach var="eleve" items="${ morceau.eleves }">
+    	   											<c:set var="j" value="${ j+1 }" scope="page" />
+        											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
+   	    										</c:forEach>
+   	    									</div>
+       									</div>
+       									</label>
+       								</c:forEach>
+       								<c:remove var="i" scope="page" />
+    	    					</div>
     	    				</c:otherwise>
     	    			</c:choose>
         			</section>

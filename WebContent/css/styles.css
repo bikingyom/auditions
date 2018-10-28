@@ -32,11 +32,17 @@
 }
 
 @media screen and (max-width: 990px) {
-  table {
+	.hidden { display: inline; margin: 0px; }
+	.bloc-morceau { display: inline; padding: 10px; }
+	#elt1, #elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 { display: inline; width: auto; line-height: 1.5; margin: 0px; }
+	input[type="radio"] { position:relative; top: 2px;}
+	
+  /*table {
     display: block;
+    display: flex;
+    flex-direction: column;
   }
   table > *, table tr, table td, table th {
-    display: block;
   }
   table thead {
     display: none;
@@ -44,10 +50,15 @@
   table tbody tr {
     height: auto;
     padding: 10px 0;
+    border: 3px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    
   }
   table tbody tr td {
     padding-left: 45% !important;
     margin-bottom: 5px;
+    border: 3px solid red;
   }
   table tbody tr td:last-child {
     margin-bottom: 0px;
@@ -65,28 +76,22 @@
   table tbody tr td:nth-child(1):before {
     content: "\00C9 diter";
   }
-  table tbody tr td:nth-child(2):before {
-    content: "Titre";
-  }
-  table tbody tr td:nth-child(3):before {
-    content: "Compositeur";
-  }
+  span[id="radio"]::before { content: "Editer "; }
+  .column-radio { width:100%; }
+  
   table tbody tr td:nth-child(4):before {
-    content: "Arrangeur";
-  }
-  table tbody tr td:nth-child(5):before {
     content: "Dur\00E9 e";
   }
-  table tbody tr td:nth-child(6):before {
+  table tbody tr td:nth-child(5):before {
     content: "Chaises";
   }
-  table tbody tr td:nth-child(7):before {
+  table tbody tr td:nth-child(6):before {
     content: "Pupitres";
   }
-  table tbody tr td:nth-child(8):before {
+  table tbody tr td:nth-child(7):before {
     content: "Mat\00E9 riel";
   }
-  table tbody tr td:nth-child(9):before {
+  table tbody tr td:nth-child(8):before {
     content: "\00C9 l\00E8 ves";
   }
 
@@ -105,7 +110,7 @@
   .column2,
   .column3,
   .column-radio {
-    width: 100%;
+    
   }
 
   .column7 {
@@ -113,5 +118,5 @@
   }
   tbody tr {
     font-size: 14px;
-  }
+  }*/
 }

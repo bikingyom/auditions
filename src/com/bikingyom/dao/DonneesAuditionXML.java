@@ -50,7 +50,6 @@ public class DonneesAuditionXML implements DonneesAudition {
 		    	Element morceauXML = (Element) it1.next();
 		    	String nouveauTitre = morceauXML.getChildText("titre");
 		    	String nouveauCompositeur = morceauXML.getChildText("compositeur");
-		    	String nouvelArrangeur = morceauXML.getChildText("arrangeur");
 		    	Duration nouvelleDuree = Duration.parse(morceauXML.getChildText("duree"));
 		    	int nouvellesChaises = Integer.parseInt(morceauXML.getChildText("chaises"));
 		    	int nouveauxPupitres = Integer.parseInt(morceauXML.getChildText("pupitres"));
@@ -68,7 +67,7 @@ public class DonneesAuditionXML implements DonneesAudition {
 		    		nouvelInstrument = eleveXML.getChildText("instrument");
 		    		nouveauxEleves.add(new Eleve(nouveauNom, nouveauPrenom, nouvelInstrument));
 		    	}
-		    	nouveauxMorceaux.add(new Morceau(nouveauTitre, nouveauCompositeur, nouvelArrangeur, nouvelleDuree, nouvellesChaises, nouveauxPupitres, nouveauMateriel, nouveauxEleves));
+		    	nouveauxMorceaux.add(new Morceau(nouveauTitre, nouveauCompositeur, nouvelleDuree, nouvellesChaises, nouveauxPupitres, nouveauMateriel, nouveauxEleves));
 		    	
 		    }
 		    audition = new Audition(nouvelleDate, nouvelleHeure, nouveauLieu, nouveauxMorceaux);
@@ -95,7 +94,6 @@ public class DonneesAuditionXML implements DonneesAudition {
 	    	racine.addContent(morceauXML);
 	    	morceauXML.addContent(new Element("titre").setText(m.getTitre()));
 	    	morceauXML.addContent(new Element("compositeur").setText(m.getCompositeur()));
-	    	morceauXML.addContent(new Element("arrangeur").setText(m.getArrangeur()));
 	    	morceauXML.addContent(new Element("duree").setText(m.getDuree().toString()));
 	    	morceauXML.addContent(new Element("chaises").setText(Integer.toString(m.getChaises())));
 	    	morceauXML.addContent(new Element("pupitres").setText(Integer.toString(m.getPupitres())));

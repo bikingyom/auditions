@@ -26,7 +26,6 @@
     	           			<table>
         	        			<tr><td><label for="titre">Titre de l'oeuvre : </label> <input type="text" name="titre" id="titre" required value="${ morceautmp.titre }" autofocus /></td></tr>
             	    			<tr><td><label for="compositeur">Compositeur : </label> <input type="text" name="compositeur" id="compositeur" value="${ morceautmp.compositeur }" /></td></tr>
-                				<tr><td><label for="arrangeur">Arrangeur : </label> <input type="text" name="arrangeur" id="arrangeur" value="${ morceautmp.arrangeur }" /></td></tr>
                 				<tr><td><label for="minutes">Durée : </label> <input type="number" name="minutes" id="minutes" value="${ morceautmp.duree == null ? 0 : morceautmp.duree.toMinutes() }" min="0" max="59" step="1"> min <input type="number" name="secondes" id="secondes" value="${ morceautmp.duree == null ? 0 : morceautmp.duree.getSeconds()%60 }" min="0" max="59" step="15"> s</td></tr>
                 				<tr><td><label for="chaises">Chaises : </label> <input type="number" name="chaises" id="chaises" min="0" max="50" step="1" value="${ morceautmp.chaises == null ? 0 : morceautmp.chaises }"></td></tr>
                 				<tr><td><label for="pupitres">Pupitres : </label> <input type="number" name="pupitres" id="pupitres" min="0" max="50" step="1" value="${ morceautmp.pupitres == null ? 0 : morceautmp.pupitres }"></td></tr>

@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.TreeSet;
 
 public class Morceau {
-	private String titre, compositeur, arrangeur;
+	private String titre, compositeur;
     private Duration duree;
     private int chaises, pupitres;
     private String materiel;
@@ -14,7 +14,6 @@ public class Morceau {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((arrangeur == null) ? 0 : arrangeur.hashCode());
 		result = prime * result + chaises;
 		result = prime * result + ((compositeur == null) ? 0 : compositeur.hashCode());
 		result = prime * result + ((duree == null) ? 0 : duree.hashCode());
@@ -34,11 +33,6 @@ public class Morceau {
 		if (getClass() != obj.getClass())
 			return false;
 		Morceau other = (Morceau) obj;
-		if (arrangeur == null) {
-			if (other.arrangeur != null)
-				return false;
-		} else if (!arrangeur.equals(other.arrangeur))
-			return false;
 		if (chaises != other.chaises)
 			return false;
 		if (compositeur == null) {
@@ -71,10 +65,9 @@ public class Morceau {
 		return true;
 	}
 
-	public Morceau(String titre, String compositeur, String arrangeur, Duration duree, int chaises, int pupitres, String materiel, TreeSet<Eleve> eleves) {
+	public Morceau(String titre, String compositeur, Duration duree, int chaises, int pupitres, String materiel, TreeSet<Eleve> eleves) {
 		this.titre = titre;
         this.compositeur = compositeur;
-        this.arrangeur = arrangeur;
         this.duree = duree;
         this.chaises = chaises;
         this.pupitres = pupitres;
@@ -104,14 +97,6 @@ public class Morceau {
 
     public void setCompositeur(String compositeur) {
         this.compositeur = compositeur;
-    }
-
-    public String getArrangeur() {
-        return arrangeur;
-    }
-
-    public void setArrangeur(String arrangeur) {
-        this.arrangeur = arrangeur;
     }
 
     public Duration getDuree() {
