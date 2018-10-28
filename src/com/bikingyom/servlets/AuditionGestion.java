@@ -93,6 +93,7 @@ public class AuditionGestion extends HttpServlet {
 						Collections.swap(audition.getMorceaux(), ind, ind-1);
 					}
 					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+					request.setAttribute("isauve", ind-2);
 				}
 				request.setAttribute("ordre", true);
 				break;
@@ -105,6 +106,7 @@ public class AuditionGestion extends HttpServlet {
 						Collections.swap(audition.getMorceaux(), ind, ind+1);
 					}
 					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+					request.setAttribute("isauve", ind);
 				}
 				request.setAttribute("ordre", true);
 				break;

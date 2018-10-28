@@ -12,6 +12,8 @@
 					document.forms[0].action='morceaugestion';
 				else if(elt.value == 'Restaurer des morceaux')
 					document.forms[0].action='restaurermorceaux';
+				else if(elt.value == "haut" || elt.value == "bas")
+					document.forms[0].action='auditiongestion#ancre';
 				else
 					document.forms[0].action='auditiongestion';
 			}
@@ -62,6 +64,7 @@
         									<c:set var="i" value="${ i+1 }" scope="page" />
 	        								<tr>
     	    									<td class="column-radio">
+    	    									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
     	    									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
 													<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
 												</td>
