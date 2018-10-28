@@ -118,6 +118,7 @@ header.menu {
 	padding: 0px;
 	border-radius:0px;
 	color: #555;
+	
 }
 
 .formulaire footer {
@@ -216,11 +217,17 @@ select.eleves {
 	background-color: #fff;
 	width: 100%;
   	margin: 0 auto;
-  	display: flex;
-  	flex-direction:column;
 }
 
 .bloc-morceau {
+  	position: relative;
+}
+
+.bloc-morceau:nth-child(even) { background-color: #eee; }
+
+.bloc-morceau:hover { background: #ddd; }
+
+.contenu-morceau {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -228,10 +235,32 @@ select.eleves {
   	font-size: 15px;
   	line-height: 1.2;
   	font-weight: unset;
+	position: relative;
+    width: 100%;
+    padding: 10px;
 }
 
-.bloc-morceau:nth-child(even) {
-	background-color: #0e0e0e;
+label.radiolabel {
+    display: block;
+    position: absolute;
+    padding: 10px;
+    margin: 0px;
+    cursor: pointer;
+    height: 100%;
+    width:100%;
+    z-index: 5;
+    opacity: 0;
+}
+
+input[type="radio"] {
+	position: relative;
+    top:-30px;
+    opacity: 0;
+    display: none;
+}
+
+ input[type="radio"]:checked ~ .contenu-morceau {
+    background-color: #bbbbff;
 }
 
 #elt1, #elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 {

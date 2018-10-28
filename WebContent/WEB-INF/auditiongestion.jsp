@@ -49,10 +49,13 @@
        								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
        									<c:set var="i" value="${ i+1 }" scope="page" />
        									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
-        								<label for="${ hashLocal }">
+        								<!--  -->
         								<div class="bloc-morceau">
+        								<label class="radiolabel" for="${ hashLocal }"></label>
         									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
-   	    									<div id="elt1"><input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } /></div>
+   	    									<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
+   	    								<div class="contenu-morceau">
+   	    								<div class="apasserinline">
 											<div id="elt2"><c:out value="${ morceau.titre }" /></div>
 											<div class="hidden"><c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '- ' }" /></div>
 											<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />
@@ -72,8 +75,10 @@
         											<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }"/> (<c:out value="${ eleve.instrument }"/>)<br />
    	    										</c:forEach>
    	    									</div>
+   	    								</div>
+   	    								</div>
        									</div>
-       									</label>
+       									<!-- </label> -->
        								</c:forEach>
        								<c:remove var="i" scope="page" />
     	    					</div>
