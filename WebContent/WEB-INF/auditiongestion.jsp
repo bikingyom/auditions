@@ -23,14 +23,14 @@
 				<input type="submit" name="bouton" value="Charger une audition"/>
 			</form>
 		</header> -->
-		<div class="limiter">
-			<div class="conteneur-1200">
-        		<div class="formulaire">
+		<div class="limiter height-100">
+			<div class="conteneur-1200 height-100">
+        		<div class="formulaire height-100 formuflex">
         			<c:if test="${ displaySaveOk }">
         				<p id="tempo">Vos modifications ont bien été enregistrées.</p>
         			</c:if>
         			<header><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></header>
-        			<section>
+        			<section id="tableau-morceaux">
         				<c:choose>
 	        				<c:when test="${ empty sessionScope.audition.morceaux || sessionScope.audition.morceaux == null }">
 								<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
@@ -62,7 +62,7 @@
         									<c:set var="i" value="${ i+1 }" scope="page" />
 	        								<tr>
     	    									<td class="column-radio">
-    	    									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" /> 
+    	    									<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
 													<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
 												</td>
         										<td class="column1"><c:out value="${ morceau.titre }" /></td>
