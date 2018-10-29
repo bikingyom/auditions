@@ -82,7 +82,8 @@ public class AuditionGestion extends HttpServlet {
 				
 			case "Changer l'ordre":
 				request.setAttribute("ordre", true);
-				request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+				if(!(request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty()))
+					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
 				break;
 				
 			case "haut":
@@ -94,6 +95,9 @@ public class AuditionGestion extends HttpServlet {
 					}
 					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
 					request.setAttribute("isauve", ind-2);
+				}
+				else {
+					request.setAttribute("erreuredition", "Pour modifier l'ordre des morceaux, vous devez cliquer sur un morceau, puis sur la flèche montante ou descendante pour le déplacer dans la liste.");
 				}
 				request.setAttribute("ordre", true);
 				break;
@@ -107,6 +111,9 @@ public class AuditionGestion extends HttpServlet {
 					}
 					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
 					request.setAttribute("isauve", ind);
+				}
+				else {
+					request.setAttribute("erreuredition", "Pour modifier l'ordre des morceaux, vous devez cliquer sur un morceau, puis sur la flèche montante ou descendante pour le déplacer dans la liste.");
 				}
 				request.setAttribute("ordre", true);
 				break;
@@ -168,6 +175,8 @@ public class AuditionGestion extends HttpServlet {
 	}
 	
 	private Morceau recupMorceauChoisi(HttpServletRequest request) {
+		if(request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty())
+			return null;
 		int hashCode = Integer.parseInt(request.getParameter("morceauchoisi"));
 		Iterator<Morceau> it = audition.getMorceaux().iterator();
 		Morceau m;

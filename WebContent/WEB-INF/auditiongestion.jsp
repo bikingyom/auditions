@@ -38,6 +38,10 @@
 								<p>Il n'y a pas encore de morceau pour cette audition, veuillez en ajouter.</p>
 							</c:when>
 							<c:otherwise>
+								<c:if test="${ !(empty erreuredition || erreuredition == null) }">
+									
+	        						<p class="warning"><c:out value="${ erreuredition }" /></p>
+	        					</c:if>
 								<c:if test="${ ordre }">
 									<div id="boutons-ordre">
 										<input type="submit" name="bouton" value="haut" form="formmorceau" id="bouton-haut" onclick="lancer(this)" />
@@ -45,6 +49,17 @@
 									</div>
 								</c:if>
     	    					<div class="bloc-tableau">
+    	    					
+    	    						<div class="contenu-morceau grand gras">
+    	    							<div id="elt2">Titre de l'oeuvre</div>
+    	    							<div id="elt3">Compositeur</div>
+    	    							<div id="elt4">Durée</div>
+    		    						<div id="elt5">Chaises</div>
+    		    						<div id="elt6">Pupitres</div>
+	    	    						<div id="elt7">Matériel</div>
+    	    							<div id="elt8">Élèves</div>
+    	    						</div>
+
       								<c:set var="i" value="0" scope="page" />
        								<c:forEach var="morceau" items="${ sessionScope.audition.morceaux }">
        									<c:set var="i" value="${ i+1 }" scope="page" />
