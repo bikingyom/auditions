@@ -39,7 +39,6 @@
 							</c:when>
 							<c:otherwise>
 								<c:if test="${ !(empty erreuredition || erreuredition == null) }">
-									
 	        						<p class="warning"><c:out value="${ erreuredition }" /></p>
 	        					</c:if>
 								<c:if test="${ ordre }">

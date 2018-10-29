@@ -125,16 +125,14 @@ public class AuditionGestion extends HttpServlet {
 				break;
 				
 			case "Supprimer un morceau":
-				int hashCode = Integer.parseInt(request.getParameter("morceauchoisi"));
-				Iterator<Morceau> it = audition.getMorceaux().iterator();
-				Morceau m;
-				do {
-					m = it.next();
-				} while (it.hasNext() && m.hashCode() != hashCode);
-				if (m.hashCode() == hashCode) {
+				Morceau m = recupMorceauChoisi(request);
+				if (m != null) {
 					audition.removeMorceau(m);
 					donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
 					request.setAttribute("displaySaveOk", true);
+				}
+				else {
+					request.setAttribute("erreuredition", "Pour supprimer un morceau, vous devez le sélectionner dans la liste avant de cliquer sur le bouton \"Supprimer un morceau\".");
 				}
 				break;
 				
@@ -154,6 +152,8 @@ public class AuditionGestion extends HttpServlet {
 						request.setAttribute("displaySaveOk", true);
 					}
 				}
+				else if (hashCodes == null || hashCodes.length == 0)
+					request.setAttribute("erreuredition", "Pour restaurer des morcecaux, vous devez les sélectionner dans la liste avant de cliquer sur le bouton \"Restaurer un morceau\". Vous pouvez recommencer, ou pas, c'est vous qui voyez !");
 				break;
 
 			default:

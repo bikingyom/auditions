@@ -23,8 +23,7 @@
 					<header><h1>Edition d'un morceau</h1></header>
 					<section>
 						<c:if test="${ !(empty erreuredition || erreuredition == null) }">
-							<img style="float:left; margin: 15px;" src="images/warning.png" />
-	        				<p><c:out value="${ erreuredition }" /></p>
+	        				<p class="warning"><c:out value="${ erreuredition }" /></p>
 	        			</c:if>
 						<form action="" onsubmit="" method="post" id="formmorceau">
     	           			<table>
