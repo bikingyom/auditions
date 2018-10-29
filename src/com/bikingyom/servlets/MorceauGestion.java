@@ -102,18 +102,24 @@ public class MorceauGestion extends HttpServlet {
 				break;
 
 			case "Ajouter un morceau":
-				session.setAttribute("modif", false);
 				morceauReset(session);
+				session.setAttribute("modif", false);
 				break;
 
 			case "Editer un morceau":
-				session.setAttribute("modif", true);
 				morceauReset(session);
-				Morceau m = recupMorceau(session, request);
-				session.setAttribute("morceautmp", m); // mémoriser les infos en cas d'appel à la page elevesgestion
-				session.setAttribute("morceauEnCoursEdition", m); // identifier le morceau modifié dans son état initial pour le retrouver dans la liste des morceaux et pouvoir lui assigner les nouvelles valeurs
-				elevesEdites.addAll(m.getEleves());
-				session.setAttribute("elevesEdites", elevesEdites);
+				if (request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty()) {
+					session.setAttribute("modif", false);
+					request.setAttribute("erreuredition", "Pour modifier un morceau, vous devez le sélectionner dans la liste avant de cliquer sur le bouton \"Editer un morceau\". Vous pouvez cliquer sur \"Annuler\" pour revenir à la page précédente et effectuer votre sélection, ou si vous vous ravisez, vous pouvez profiter de ce formulaire pour saisir un nouveau morceau !");
+				}
+				else {
+					session.setAttribute("modif", true);
+					Morceau m = recupMorceau(session, request);
+					session.setAttribute("morceautmp", m); // mémoriser les infos en cas d'appel à la page elevesgestion
+					session.setAttribute("morceauEnCoursEdition", m); // identifier le morceau modifié dans son état initial pour le retrouver dans la liste des morceaux et pouvoir lui assigner les nouvelles valeurs
+					elevesEdites.addAll(m.getEleves());
+					session.setAttribute("elevesEdites", elevesEdites);
+				}
 				break;
 
 			default:

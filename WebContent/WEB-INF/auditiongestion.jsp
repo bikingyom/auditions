@@ -52,7 +52,7 @@
         								<div class="bloc-morceau">
 	        								<label class="radiolabel" for="${ hashLocal }"></label>
         									<c:if test="${ i == isauve }"><a id="ancre"></a></c:if>
-   	    									<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre != true && i == 1) || (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
+   	    									<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" ${ (ordre == true && hashLocal == hashChoisi) ? 'checked="checked"' : '' } />
    	    									<div class="contenu-morceau grand">
 												<div id="elt2"><c:out value="${ morceau.titre }" /></div>
 												<div id="elt3"><c:out value="${ morceau.compositeur }" /></div><br />

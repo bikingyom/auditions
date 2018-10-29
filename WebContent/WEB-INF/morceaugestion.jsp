@@ -22,6 +22,10 @@
 				<div class="formulaire">
 					<header><h1>Edition d'un morceau</h1></header>
 					<section>
+						<c:if test="${ !(empty erreuredition || erreuredition == null) }">
+							<img style="float:left; margin: 15px;" src="images/warning.png" />
+	        				<p><c:out value="${ erreuredition }" /></p>
+	        			</c:if>
 						<form action="" onsubmit="" method="post" id="formmorceau">
     	           			<table>
         	        			<tr><td><label for="titre">Titre de l'oeuvre : </label> <input type="text" name="titre" id="titre" required value="${ morceautmp.titre }" autofocus /></td></tr>
