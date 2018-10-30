@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Edition d'un morceau - Conservatoire Haut-Jura-Saint-Claude</title>
-		<link rel="stylesheet" href="css/stylesmorceau.css" />
+		<link rel="stylesheet" href="css/styles.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript">
 			function lancer(elt) {
@@ -28,16 +28,16 @@
 						<form action="" onsubmit="" method="post" id="formmorceau">
 							<div class="bloc-tableau">
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="titre">Titre de l'oeuvre : </label></div>
-									<div class="elt-60pc"><input type="text" name="titre" id="titre" required value="${ morceautmp.titre }" autofocus /></div>
+									<div class="elt-30pc"><label for="titre">Titre de l'oeuvre&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="text" name="titre" id="titre" required value="${ morceautmp.titre }" autofocus /></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="compositeur">Compositeur : </label></div>
-									<div class="elt-60pc"><input type="text" name="compositeur" id="compositeur" value="${ morceautmp.compositeur }" /></div>
+									<div class="elt-30pc"><label for="compositeur">Compositeur&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="text" name="compositeur" id="compositeur" value="${ morceautmp.compositeur }" /></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="minutes">Durée : </label></div>
-									<div class="elt-60pc">
+									<div class="elt-30pc"><label for="minutes">Durée&nbsp;: </label></div>
+									<div class="elt-70pc">
 										<input type="number" name="minutes" id="minutes" value="${ morceautmp.duree == null ? 0 : morceautmp.duree.toMinutes() }" min="0" max="59" step="1"> min
 										<!-- <input type="number" name="secondes" id="secondes" value="${ morceautmp.duree == null ? 0 : morceautmp.duree.getSeconds()%60 }" min="0" max="59" step="15"> s -->
 										<c:set var="sec" value="${ morceautmp.duree == null ? 0 : morceautmp.duree.getSeconds()%60 }" scope="page" />
@@ -53,16 +53,16 @@
 									</div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="chaises">Chaises : </label></div>
-									<div class="elt-60pc"><input type="number" name="chaises" id="chaises" min="0" max="100" step="1" value="${ morceautmp.chaises == null ? 0 : morceautmp.chaises }"></div>
+									<div class="elt-30pc"><label for="chaises">Chaises&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="number" name="chaises" id="chaises" min="0" max="100" step="1" value="${ morceautmp.chaises == null ? 0 : morceautmp.chaises }"></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="pupitres">Pupitres : </label></div>
-									<div class="elt-60pc"><input type="number" name="pupitres" id="pupitres" min="0" max="100" step="1" value="${ morceautmp.pupitres == null ? 0 : morceautmp.pupitres }"></div>
+									<div class="elt-30pc"><label for="pupitres">Pupitres&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="number" name="pupitres" id="pupitres" min="0" max="100" step="1" value="${ morceautmp.pupitres == null ? 0 : morceautmp.pupitres }"></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
-									<div class="elt-30pc"><label for="titre">Matériel : </label></div>
-									<div class="elt-60pc"><input type="text" name="materiel" id="materiel" value="${ morceautmp.materiel }" /></div>
+									<div class="elt-30pc"><label for="titre">Matériel&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="text" name="materiel" id="materiel" value="${ morceautmp.materiel }" /></div>
 								</div>
 							</div>
     	           		
@@ -82,21 +82,20 @@
 							<p>Il n'y a pas encore d'élève pour ce morceau, veuillez en ajouter.</p>
 						</c:if>
 						<c:if test="${ !(empty elevesEdites || elevesEdites == null) }">
-    		  				<table>
-       							<c:set var="i" value="0" scope="page" />
+    		  				<div class="bloc-tableau">
        							<c:forEach var="eleve" items="${ elevesEdites }">
-       								<c:set var="i" value="${ i+1 }" scope="page" />
-       								<tr>
-       									<td class="column-radio">
-											<input type="radio" name="elevechoisi" value="${ eleve.hashCode() }" id="${ eleve.hashCode() }" form="formmorceau" />
-										</td>
-       									<td class="column1"><c:out value="${ eleve.nom }" /></td>
-       									<td class="column2"><c:out value="${ eleve.prenom }" /></td>
-       									<td class="column3"><c:out value="${ eleve.instrument }" /></td>
-       								</tr> 
+       								<c:set var="hashLocal" value="${ eleve.hashCode() }" scope="page" />
+        								<div class="bloc-morceau">
+	        								<label class="radiolabel" for="${ hashLocal }"></label>
+   	    									<input type="radio" name="elevechoisi" value="${ hashLocal }" id="${ hashLocal }" form="formmorceau" />
+   	    									<div class="contenu-morceau">
+   	    										<div class="elt-40pc"><c:out value="${ eleve.nom }" /></div>
+   	    										<div class="elt-30pc"><c:out value="${ eleve.prenom }" /></div>
+   	    										<div class="elt-30pc"><c:out value="${ eleve.instrument }" /></div>
+   	    									</div>
+   	    								</div>
 	       						</c:forEach>
-	       						<c:remove var="i" scope="page" />
-    	    				</table>
+    	    				</div>
         				</c:if>
         				<c:if test="${ !(empty erreur || erreur == null) }">
 	        				<p><c:out value="${ erreur }" /></p>

@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Gestion des auditions - Conservatoire Haut-Jura-Saint-Claude</title>
-		<link rel="stylesheet" href="css/stylesmorceau.css" />
 		<link rel="stylesheet" href="css/styles.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript">
@@ -12,7 +11,7 @@
 					document.forms[0].action='morceaugestion';
 				else if(elt.value == 'Restaurer des morceaux')
 					document.forms[0].action='restaurermorceaux';
-				else if(elt.value == "haut" || elt.value == "bas")
+				else if(elt.value == "haut" || elt.value == "bas" || elt.value == "Changer l'ordre")
 					document.forms[0].action='auditiongestion#ancre';
 				else
 					document.forms[0].action='auditiongestion';

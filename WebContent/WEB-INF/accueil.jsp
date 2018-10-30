@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Gestion des auditions - Conservatoire Haut-Jura-Saint-Claude</title>
-		<link rel="stylesheet" href="css/stylesmorceau.css" />
+		<link rel="stylesheet" href="css/styles.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
@@ -27,11 +27,20 @@
 					<form action="auditiongestion" method="post">
         				<header><h1>Nouvelle audition</h1></header>
         				<section>
-        					<table>
-            		   			<tr><td><label for="nom">Date : </label><input type="date" name="date" id="date" required /></td></tr>
-        	       				<tr><td><label for="heure">Heure : </label><input type="time" name="heure" id="heure" required /></td></tr>
-	    	           			<tr><td><label for="lieu">Lieu : </label><input type="text" name="lieu" id="lieu" required /></td></tr>
-    		           		</table>
+        					<div class="bloc-tableau">
+								<div class="bloc-morceau contenu-morceau">
+									<div class="elt-30pc"><label for="nom">Date&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="date" name="date" id="date" required /></div>
+								</div>
+								<div class="bloc-morceau contenu-morceau">
+									<div class="elt-30pc"><label for="heure">Heure&nbsp;: </label></div>
+									<div class="elt-70pc"><input type="time" name="heure" id="heure" required /></div>
+								</div>
+								<div class="bloc-morceau contenu-morceau">
+	               					<div class="elt-30pc"><label for="lieu">Lieu&nbsp;: </label></div>
+               						<div class="elt-70pc"><input type="text" name="lieu" id="lieu" required /></div>
+								</div>
+							</div>
         				</section>
         				<footer>
 							<input type="submit" name="bouton" value="Créer une audition" />

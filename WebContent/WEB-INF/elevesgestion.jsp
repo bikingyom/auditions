@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Edition d'un élève - Conservatoire Haut-Jura-Saint-Claude</title>
-		<link rel="stylesheet" href="css/stylesmorceau.css" />
+		<link rel="stylesheet" href="css/styles.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
@@ -61,15 +61,15 @@
 							<div class="bloc-tableau">
 								<div class="bloc-morceau contenu-morceau">
 									<div class="elt-30pc"><label for="nom">Nom&nbsp;: </label></div>
-									<div class="elt-60pc"><input type="text" name="nom" id="nom" required /></div>
+									<div class="elt-70pc"><input type="text" name="nom" id="nom" required /></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
 									<div class="elt-30pc"><label for="prenom">Prénom&nbsp;: </label></div>
-									<div class="elt-60pc"><input type="text" name="prenom" id="prenom" required /></div>
+									<div class="elt-70pc"><input type="text" name="prenom" id="prenom" required /></div>
 								</div>
 								<div class="bloc-morceau contenu-morceau">
 	               					<div class="elt-30pc"><label for="instrument">Instrument&nbsp;: </label></div>
-               						<div class="elt-60pc">
+               						<div class="elt-70pc">
                							<select name="instrument" id="instrument">
 	               							<option value="Flute">Flute</option>
     	           							<option value="Hautbois">Hautbois</option>
