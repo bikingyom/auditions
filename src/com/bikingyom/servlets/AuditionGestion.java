@@ -82,8 +82,14 @@ public class AuditionGestion extends HttpServlet {
 				
 			case "Changer l'ordre":
 				request.setAttribute("ordre", true);
-				if(!(request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty()))
+				if(!(request.getParameter("morceauchoisi") == null || request.getParameter("morceauchoisi").isEmpty())) {
+					Morceau m1 = recupMorceauChoisi(request);
 					request.setAttribute("hashChoisi", Integer.parseInt(request.getParameter("morceauchoisi")));
+					if (m1 != null) {
+						int ind = audition.getMorceaux().indexOf(m1);
+						request.setAttribute("isauve", ind-1);
+					}
+				}
 				break;
 				
 			case "haut":
