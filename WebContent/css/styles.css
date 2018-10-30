@@ -53,11 +53,14 @@ header.menu {
   padding: 20px;
 }
 
-.conteneur-600, .conteneur-1200 {
+.conteneur-600, .conteneur-1200, .formuflex, #boutons-ordre {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   flex-direction: column;
 }
 
@@ -77,13 +80,6 @@ header.menu {
 }
 
 .height-100 { height: 100%; }
-
-.formuflex {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
 .formulaire header, footer {
 	width: 100%;
@@ -128,10 +124,6 @@ header.menu {
 
 #boutons-ordre {
 	background: #36304a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     right: 10px;
     top: 50%;
@@ -159,13 +151,23 @@ input[type="submit"] {
     padding:5px 15px;
     cursor:pointer;
     border-radius: 5px;
+    background: #666666;
+    background: -webkit-linear-gradient(0deg, #666666, #eeeeee);
+    background: -o-linear-gradient(0deg, #666666, #eeeeee);
+    background: -moz-linear-gradient(0deg, #666666, #eeeeee);
     background: linear-gradient(0deg, #666666, #eeeeee);
     font-size: 14px;
     font-weight: normal;
     margin: 2px;
 }
 
-input[type="submit"]:active { opacity: 0.5; }
+input[type="submit"]:active {
+    background: #bbbbff;
+    background: -webkit-linear-gradient(0deg, #666666, #bbbbff);
+    background: -o-linear-gradient(0deg, #666666, #bbbbff);
+    background: -moz-linear-gradient(0deg, #666666, #bbbbff);
+    background: linear-gradient(0deg, #6666bb, #bbbbff);
+}
 
 label:hover { cursor: pointer; color: #222; }
 
@@ -181,16 +183,15 @@ select.eleves {
   	margin: 0 auto;
 }
 
-.bloc-morceau {
-  	position: relative;
-  	padding: 0px;
-}
-
+.bloc-morceau { position: relative; padding: 0px; }
 .bloc-morceau:nth-child(even) { background-color: #eee; }
-
 .bloc-morceau:hover { background: #ddd; }
 
 .contenu-morceau {
+	display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -242,7 +243,6 @@ input[type="radio"]:checked ~ .contenu-morceau, input[type="checkbox"]:checked ~
 .elt-60pc { width: 60%; }
 .elt-70pc { width: 70%; }
 
-.hidden { display: none; }
 .display-none { display:none; }
 
 p.warning {
@@ -279,7 +279,6 @@ p.warning {
 }
 
 @media screen and (max-width: 990px) {
-	.hidden { display: inline; margin: 0px; }
 	.grand { display: none; }
 	.petit { display: block; }
 	.morceau-inline { display: inline; }
