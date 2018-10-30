@@ -240,19 +240,9 @@ select.eleves {
     width: 100%;
     padding: 10px;
 }
-.morceau-inline {
-	display: none;
-/*	font-family: OpenSans-Regular;
-  	font-size: 15px;
-  	line-height: 1.2;
-  	font-weight: unset;
-	position: relative;
-    width: 100%;
-    padding: 0px;*/
-}
 
+.morceau-inline { display: none; }
 .petit { display: none; }
-
 .gras { font-weight: bold; }
 
 label.radiolabel {
@@ -274,50 +264,22 @@ input[type="radio"], input[type="checkbox"] {
     display: none;
 }
 
- input[type="radio"]:checked ~ .contenu-morceau, input[type="checkbox"]:checked ~ .contenu-morceau {
-    background-color: #bbbbff;
-}
+ input[type="radio"]:checked ~ .contenu-morceau, input[type="checkbox"]:checked ~ .contenu-morceau { background-color: #bbbbff; }
 
-#elt1, #elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 {
-	margin: 5px;
-} 
+#elt2, #elt3, #elt4, #elt5, #elt6, #elt7, #elt8 { margin: 5px; } 
+#elt2 { width: 230px; flex-grow: 2; }
+#elt3 { width: 150px; flex-grow: 2; }
+#elt4 { width: 70px; text-align: center; }
+#elt5 { width: 70px; text-align: center; }
+#elt6 { width: 70px; text-align: center; }
+#elt7 { width: 250px; flex-grow: 2; }
+#elt8 { width: 250px; flex-grow: 1.5; }
 
-#elt1 {
-	min-width: 50px;
-	text-align: center;
-}
-#elt2 {
-	width: 230px;
-	flex-grow: 2;
-}
-#elt3 {
-	width: 150px;
-	flex-grow: 2;
-}
-#elt4 {
-	width: 70px;
-	text-align: center;
-}
-#elt5 {
-	width: 70px;
-	text-align: center;
-}
-#elt6 {
-	width: 70px;
-	text-align: center;
-}
-#elt7 {
-	width: 250px;
-	flex-grow: 2;
-}
-#elt8 {
-	width: 250px;
-	flex-grow: 1.5;
-}
+.elt-30pc { width: 30%; }
+.elt-40pc {	width: 40%; }
+.elt-60pc { width: 60%; }
 
-.hidden {
-	display: none;
-}
+.hidden { display: none; }
 
 p.warning {
 	background-image: url("../images/warning.png");
@@ -367,11 +329,6 @@ tbody tr {
   font-weight: unset;
 }
 
-.column-radio {
-	width: 50px;
-	text-align: center;
-}
-
 #tempo {
 	background: #36304a;
 	font-family: OpenSans-Regular;
@@ -387,22 +344,14 @@ tbody tr {
     left:50%;
     top: 20px;
     margin-left:-250px;
-	animation-name: example;
+	animation-name: disappear;
 	animation-duration: 4s;
 	opacity: 0;
 }
 
-@keyframes example {
-    from {
-    	opacity: 1;
-    	
-    }
-    to {
-    	opacity: 0;
-    	
-    }
+@keyframes disappear {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
-.display-none {
-	display:none;
-}
+.display-none { display:none; }

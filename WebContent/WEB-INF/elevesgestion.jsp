@@ -31,27 +31,23 @@
        					<form action="morceaugestion" method="post">
         					<header><h1>Dupliquer les élèves d'un autre morceau</h1></header>
         					<section>
-	    	    				<table>
-   			    					<c:forEach var="morceau" items="${ audition.morceaux }">
-	   									<tr>
-											<td class="column-radio">
-												<input type="radio" name="morceauchoisi" value="${ morceau.hashCode() }" id="${ morceau.hashCode() }">
-											</td>
-    										<td>
-    											<label for="${ morceau.hashCode() }">
-    												<c:out value="${ morceau.titre }" /> <c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '-' }" /> <c:out value="${ morceau.compositeur }" />
-    											</label>
-    										</td>
-   											<td>
-   												<label for="${ morceau.hashCode() }">
-   													<c:forEach var="eleve" items="${ morceau.eleves }">
+        						<div class="bloc-tableau">
+        							<c:forEach var="morceau" items="${ audition.morceaux }">
+	        							<c:set var="hashLocal" value="${ morceau.hashCode() }" scope="page" />
+    	    							<div class="bloc-morceau">
+	    	    							<label class="radiolabel" for="${ hashLocal }"></label>
+    										<input type="radio" name="morceauchoisi" value="${ hashLocal }" id="${ hashLocal }" } />
+    										<div class="contenu-morceau">
+    											<div class="elt-60pc"><c:out value="${ morceau.titre }" /> <c:out value="${ empty morceau.compositeur || morceau.compositeur == null ? '' : '-' }" /> <c:out value="${ morceau.compositeur }" /></div>
+    											<div class="elt-40pc">
+    												<c:forEach var="eleve" items="${ morceau.eleves }">
    														<c:out value="${ eleve.prenom }"/> <c:out value="${ eleve.nom }" /><br />
    													</c:forEach>
-   												</label>
-   											</td>
-   										</tr>
-       								</c:forEach>
-	        					</table>
+    											</div>
+	    									</div>
+   										</div>
+   									</c:forEach>
+   								</div>
        						</section>
        						<footer><input type="submit" name="bouton" value="Dupliquer les élèves"> <input type="submit" name="bouton" value="Annuler" form="formannuler"/></footer>
    						</form>
@@ -62,33 +58,41 @@
         	        <form action="morceaugestion" method="post">
 						<header><h1>Saisie d'un nouvel élève</h1></header>
 						<section>
-                			<table>
-            		   			<tr><td><label for="nom">Nom : </label><input type="text" name="nom" id="nom" required /></td></tr>
-        	       				<tr><td><label for="prenom">Prénom : </label><input type="text" name="prenom" id="prenom" required /></td></tr>
-    	           				<tr><td>
-	               					<label for="instrument">Instrument : </label>
-               						<select name="instrument" id="instrument">
-               							<option value="Flute">Flute</option>
-               							<option value="Hautbois">Hautbois</option>
-               							<option value="Clarinette">Clarinette</option>
-               							<option value="Saxophone">Saxophone</option>
-               							<option value="Basson">Basson</option>
-            	   						<option value="Piano">Piano</option>
-        	       						<option value="Guitare">Guitare</option>
-        	       						<option value="Violon">Violon</option>
-        	       						<option value="Alto">Alto</option>
-        	       						<option value="Violoncelle">Violoncelle</option>
-        	       						<option value="Contrebasse">Contrebasse</option>
-    	           						<option value="Trompette">Trompette</option>
-	               						<option value="Trombone">Trombone</option>
-               							<option value="Tuba">Tuba</option>
-               							<option value="Chant">Chant</option>
-               							<option value="Percussions">Percussions</option>
-               							<option value="Batterie">Batterie</option>
-               							<option value="Accordéon">Accordéon</option>
-            	   					</select>
-        	       				</td></tr>
-    	            		</table>
+							<div class="bloc-tableau">
+								<div class="bloc-morceau contenu-morceau">
+									<div class="elt-30pc"><label for="nom">Nom&nbsp;: </label></div>
+									<div class="elt-60pc"><input type="text" name="nom" id="nom" required /></div>
+								</div>
+								<div class="bloc-morceau contenu-morceau">
+									<div class="elt-30pc"><label for="prenom">Prénom&nbsp;: </label></div>
+									<div class="elt-60pc"><input type="text" name="prenom" id="prenom" required /></div>
+								</div>
+								<div class="bloc-morceau contenu-morceau">
+	               					<div class="elt-30pc"><label for="instrument">Instrument&nbsp;: </label></div>
+               						<div class="elt-60pc">
+               							<select name="instrument" id="instrument">
+	               							<option value="Flute">Flute</option>
+    	           							<option value="Hautbois">Hautbois</option>
+        	       							<option value="Clarinette">Clarinette</option>
+            	   							<option value="Saxophone">Saxophone</option>
+               								<option value="Basson">Basson</option>
+            	   							<option value="Piano">Piano</option>
+        	       							<option value="Guitare">Guitare</option>
+        	       							<option value="Violon">Violon</option>
+        	       							<option value="Alto">Alto</option>
+        	       							<option value="Violoncelle">Violoncelle</option>
+        	       							<option value="Contrebasse">Contrebasse</option>
+	    	           						<option value="Trompette">Trompette</option>
+		               						<option value="Trombone">Trombone</option>
+        	       							<option value="Tuba">Tuba</option>
+            	   							<option value="Chant">Chant</option>
+               								<option value="Percussions">Percussions</option>
+               								<option value="Batterie">Batterie</option>
+               								<option value="Accordéon">Accordéon</option>
+            	   						</select>
+            	   					</div>
+								</div>
+							</div>
 						</section>
 						<footer>
 							<input type="submit" name="bouton" value="Valider l'élève"> <input type="submit" name="bouton" value="Annuler" form="formannuler"/>
