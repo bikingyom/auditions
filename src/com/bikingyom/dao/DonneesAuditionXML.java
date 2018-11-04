@@ -32,6 +32,7 @@ public class DonneesAuditionXML implements DonneesAudition {
 	
 	@Override
 	public Audition charger(File fichier) {
+
 		Audition audition = null;
 		try {
 			SAXBuilder builder = new SAXBuilder();

@@ -13,6 +13,10 @@
 					document.forms[0].action='restaurermorceaux';
 				else if(elt.value == "haut" || elt.value == "bas" || elt.value == "Changer l'ordre")
 					document.forms[0].action='auditiongestion#ancre';
+				else if(elt.value == "Editer")
+					document.forms[0].action='dateheurelieu';
+				else if(elt.value == "Accueil")
+					document.forms[0].action='accueil';
 				else
 					document.forms[0].action='auditiongestion';
 			}
@@ -30,7 +34,13 @@
         			<c:if test="${ displaySaveOk }">
         				<p id="tempo">Vos modifications ont bien été enregistrées.</p>
         			</c:if>
-        			<header><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></header>
+        			<header>
+        				<div><h1>Audition du <c:out value="${ audition.getFormattedDate() }" /> à <c:out value="${ audition.heure }" /><br /><c:out value="${ audition.lieu }" /></h1></div>
+        				<div>
+       						<input type="submit" name="bouton" value="Editer" onclick="lancer(this)" form="formmorceau" title="Modifier la date, l'heure et le lieu de l'audition" />
+       						<input type="submit" name="bouton" value="Accueil" onclick="lancer(this)" form="formmorceau" title="Revenir à la page d'accueil, pour pouvoir charger une autre audition ou en créer une nouvelle" />
+        				</div>
+        			</header>
         			<section id="tableau-morceaux">
         				<c:choose>
 	        				<c:when test="${ empty sessionScope.audition.morceaux || sessionScope.audition.morceaux == null }">

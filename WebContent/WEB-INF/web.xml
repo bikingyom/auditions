@@ -9,6 +9,14 @@
     <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DateHeureLieu</servlet-name>
+    <servlet-class>com.bikingyom.servlets.DateHeureLieu</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DateHeureLieu</servlet-name>
+    <url-pattern>/dateheurelieu</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>AuditionGestion</servlet-name>
     <servlet-class>com.bikingyom.servlets.AuditionGestion</servlet-class>
   </servlet>

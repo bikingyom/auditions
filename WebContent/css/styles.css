@@ -88,8 +88,16 @@ header.menu {
 }
 
 .formulaire header {
-    text-align: left;
-    border-radius: 10px 10px 0px 0px;
+  text-align: left;
+  border-radius: 10px 10px 0px 0px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .formulaire section {

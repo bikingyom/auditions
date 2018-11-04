@@ -14,11 +14,38 @@
 	        			<p id="tempo"><c:out value="${ erreur }" /></p>
 	        		</c:if>
     	    		<header><h1>Charger une audition</h1></header>
-        			<section>
-        				<p>Ici se trouvera la liste des auditions existantes</p>
+       				<section id="tableau-morceaux">
+        				<c:choose>
+	        				<c:when test="${ empty auditions || auditions == null }">
+								<p>Il n'y a pas encore d'audition prévue, veuillez en ajouter.</p>
+							</c:when>
+							<c:otherwise>
+    	    					<div class="bloc-tableau">
+    	    					
+    	    						<div class="contenu-morceau gras">
+    	    							<div class="elt-30pc">Date</div>
+    	    							<div class="elt-30pc">Heure</div>
+    	    							<div class="elt-40pc">Lieu</div>
+    	    						</div>
+
+       								<c:forEach var="audition" items="${ auditions }">
+        								<div class="bloc-morceau">
+	        								<label class="radiolabel" for="${ audition.hashCode() }"></label>
+   	    									<input type="radio" name="auditionchoisie" value="${ audition.fichier }" id="${ audition.hashCode() }" form="formcharger" />
+   	    									<div class="contenu-morceau">
+												<div class="elt-30pc"><c:out value="${ audition.getFormattedDate() }" /></div>
+												<div class="elt-30pc"><c:out value="${ audition.heure }" /></div>
+    	   										<div class="elt-40pc"><c:out value="${ audition.lieu }" /></div>
+   	    									</div>
+   	    								</div>
+       								</c:forEach>
+       								<c:remove var="i" scope="page" />
+    	    					</div>
+    	    				</c:otherwise>
+    	    			</c:choose>
         			</section>
 	        		<footer>
-    	    			<form action="auditiongestion" method="post">
+    	    			<form action="auditiongestion" method="post" id="formcharger">
 							<input type="submit" name="bouton" value="Charger une audition" />
 						</form>
 					</footer>

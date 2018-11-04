@@ -56,14 +56,22 @@ public class AuditionGestion extends HttpServlet {
 
 			switch (action) {
 			case "Charger une audition":
-				audition = donnees.charger(new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				File fichier = new File(request.getParameter("auditionchoisie"));
+				audition = donnees.charger(fichier);
+				session.setAttribute("fichier", fichier);
 				break;
 
 			case "Créer une audition":
-				audition.setDate(LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-				audition.setHeure(LocalTime.parse(request.getParameter("heure"), DateTimeFormatter.ofPattern("HH:mm")));
-				audition.setLieu(request.getParameter("lieu"));
+				setDateHeureLieu(request);
 				audition.setMorceaux(new ArrayList<Morceau>());
+				File fichier1 = new File(this.getServletContext().getRealPath("") + "/audition" + audition.getDate() + ".xml");
+				session.setAttribute("fichier", fichier1);
+				break;
+
+			case "Valider": // Correspond aux modifications de la date, l'heure et le lieu de l'audition
+				setDateHeureLieu(request);
+				donnees.enregistrer(audition, (File)session.getAttribute("fichier"));
+				request.setAttribute("displaySaveOk", true);
 				break;
 
 			case "Valider le morceau":
@@ -76,7 +84,7 @@ public class AuditionGestion extends HttpServlet {
 				else // s'il s'agit d'un nouveau morceau
 					audition.addMorceau(recupNouveauMorceau(request));
 
-				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				donnees.enregistrer(audition, (File)session.getAttribute("fichier"));
 				request.setAttribute("displaySaveOk", true);
 				break;
 				
@@ -125,7 +133,7 @@ public class AuditionGestion extends HttpServlet {
 				break;
 				
 			case "Valider l'ordre":
-				donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+				donnees.enregistrer(audition, (File)session.getAttribute("fichier"));
 				request.setAttribute("displaySaveOk", true);
 				request.setAttribute("ordre", false);
 				break;
@@ -134,7 +142,7 @@ public class AuditionGestion extends HttpServlet {
 				Morceau m = recupMorceauChoisi(request);
 				if (m != null) {
 					audition.removeMorceau(m);
-					donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+					donnees.enregistrer(audition, (File)session.getAttribute("fichier"));
 					request.setAttribute("displaySaveOk", true);
 				}
 				else {
@@ -154,14 +162,14 @@ public class AuditionGestion extends HttpServlet {
 						} while (it2.hasNext() && m2.hashCode() != Integer.parseInt(s));
 						audition.addMorceau(m2);
 						audition.removeMorceauSuppr(m2);
-						donnees.enregistrer(audition, new File(this.getServletContext().getRealPath("") + "/audition.xml"));
+						donnees.enregistrer(audition, (File)session.getAttribute("fichier"));
 						request.setAttribute("displaySaveOk", true);
 					}
 				}
 				else if (hashCodes == null || hashCodes.length == 0)
 					request.setAttribute("erreuredition", "Pour restaurer des morcecaux, vous devez les sélectionner dans la liste avant de cliquer sur le bouton \"Restaurer un morceau\". Vous pouvez recommencer, ou pas, c'est vous qui voyez !");
 				break;
-
+				
 			default:
 				break;
 
@@ -170,6 +178,12 @@ public class AuditionGestion extends HttpServlet {
 				session.setAttribute("audition", audition);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/auditiongestion.jsp").forward(request, response);
 		}
+	}
+
+	private void setDateHeureLieu(HttpServletRequest request) {
+		audition.setDate(LocalDate.parse(request.getParameter("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		audition.setHeure(LocalTime.parse(request.getParameter("heure"), DateTimeFormatter.ofPattern("HH:mm")));
+		audition.setLieu(request.getParameter("lieu"));
 	}
 
 	private Morceau recupNouveauMorceau(HttpServletRequest request) {
